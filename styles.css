@@ -1,0 +1,30 @@
+.block_people .teachers ul,
+.block_people .teachers li {
+        list-style: none;
+        margin-left: 0;
+}
+
+.block_people .teachers li {
+        margin-bottom: 10px;
+        clear: both;
+}
+
+.block_people .teachers .icons {
+        display: block;
+}
+
+.block_people .teachers .icons img,
+.block_people .participants img {
+        margin-right: 5px;
+}
+
+.block_people .content .teachers .userpicture {
+        float: left;
+        margin-right: 10px;
+        width: inherit;
+        height: inherit;
+}
+
+.block_people .participants .hint {
+        font-size: 90% !important;
+}
