@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 $plugin->component = 'block_people';
-$plugin->version = 2012061700;
-$plugin->release = '2.3 (Build: 2012061700)';
-$plugin->requires = 2012061700;
+$plugin->version = 2012062500;
+$plugin->release = '2.3 (Build: 2012062500)';
+$plugin->requires = 2012062500;
 $plugin->maturity = MATURITY_STABLE;
