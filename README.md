@@ -5,11 +5,12 @@ Moodle block which displays all teachers of a course with contact quicklinks, as
 
 Requirements
 ============
-This plugin requires Moodle 2.1+
+This plugin requires Moodle 2.3+
 
 
 Changes
 =======
+2012-06-25 - Update version.php for Moodle 2.3
 2012-06-01 - Initial version
 
 
@@ -24,6 +25,11 @@ See http://docs.moodle.org/22/en/Installing_plugins for details on installing Mo
 Usage
 =====
 The block_people plugin displays a list of the course's teachers grouped by roles. The block shows the teacher's avatar, a quicklink to his/her profile and a quicklink to send him/her a message with the moodle message system. Furthermore, there is a quicklink to the participants list of the course.
+
+
+Themes
+======
+block_people should work with all themes from moodle core.
 
 
 Settings
@@ -54,4 +60,6 @@ block_people shows teacher role groups in the order defined in /admin/roles/mana
 
 Further information
 ===================
+block_people is found in the Moodle Plugins repository: http://moodle.org/plugins/view.php?plugin=block_people
+
 Report a bug or suggest an improvement: https://github.com/abias/moodle-block_people/issues
