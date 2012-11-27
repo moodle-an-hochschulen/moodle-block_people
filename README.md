@@ -10,6 +10,7 @@ This plugin requires Moodle 2.3+
 
 Changes
 =======
+2012-11-27 - Small code cleanup
 2012-10-10 - German language has been integrated into AMOS and was removed from this plugin. Please update your language packs with http://YOURMOODLEURL/admin/tool/langimport/index.php after installing this plugin version
 2012-06-25 - Update version.php for Moodle 2.3
 2012-06-01 - Initial version
@@ -21,6 +22,13 @@ Install the plugin like any other plugin to folder
 /blocks/people
 
 See http://docs.moodle.org/22/en/Installing_plugins for details on installing Moodle plugins
+
+
+Placement
+=========
+block_people is used ideally as sticky block and appears on all of your course pages at the same position
+
+See http://docs.moodle.org/23/en/Sticky_blocks for details about sticky blocks
 
 
 Usage
@@ -41,7 +49,7 @@ block_people has neither a settings page nor settings in config.php. Nevertheles
 -------------------
 block_people gets the list of teachers from $CFG->coursecontact. With this Moodle core setting, you can define which roles are displayed in block_people's list of teachers.
 
-2. Quicklist for teachers
+2. Quicklink for teachers
 -------------------------
 block_people only shows a quicklink to the teacher's profile if the user has the capability moodle/user:viewdetails
 See http://docs.moodle.org/22/en/Capabilities/moodle/user:viewdetails for details on this capability
@@ -64,3 +72,8 @@ Further information
 block_people is found in the Moodle Plugins repository: http://moodle.org/plugins/view.php?plugin=block_people
 
 Report a bug or suggest an improvement: https://github.com/abias/moodle-block_people/issues
+
+
+Copyright
+=========
+Alexander Bias, University of Ulm

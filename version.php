@@ -14,8 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+defined('MOODLE_INTERNAL') || die();
+
 $plugin->component = 'block_people';
 $plugin->version = 2012062501;
-$plugin->release = '2.3 (Build: 2012062501)';
+$plugin->release = '2.3 (Build: 2012062502)';
 $plugin->requires = 2012062500;
 $plugin->maturity = MATURITY_STABLE;
