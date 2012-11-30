@@ -122,6 +122,7 @@ class block_people extends block_base {
     }
 
     function applicable_formats() {
-        return array('course-view' => true);
+        return array('course-view' => true,
+        			'site' => true);
     }
 }

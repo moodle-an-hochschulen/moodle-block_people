@@ -10,6 +10,7 @@ This plugin requires Moodle 2.3+
 
 Changes
 =======
+2012-11-30 - Bugfix: Block couldn't be added to frontpage, therefore it couldn't be used as sticky block
 2012-11-27 - Small code cleanup
 2012-10-10 - German language has been integrated into AMOS and was removed from this plugin. Please update your language packs with http://YOURMOODLEURL/admin/tool/langimport/index.php after installing this plugin version
 2012-06-25 - Update version.php for Moodle 2.3
