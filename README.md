@@ -49,7 +49,7 @@ block_people has neither a settings page nor settings in config.php. Nevertheles
 
 1. List of teachers
 -------------------
-block_people gets the list of teachers from $CFG->coursecontact. With this Moodle core setting, you can define which roles are displayed in block_people's list of teachers.
+block_people gets the list of teacher roles from $CFG->coursecontact. With this Moodle core setting, you can define which roles are displayed in block_people's list of teachers.
 
 2. Quicklink for teachers
 -------------------------
