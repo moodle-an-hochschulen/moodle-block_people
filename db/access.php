@@ -8,7 +8,7 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
@@ -16,7 +16,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'People';
-$string['participantslist'] = 'Show participants list';
-$string['people:addinstance'] = 'Add a new people block';
-$string['noparticipantslist'] = 'Viewing the participants list is prohibited in this course';
+$capabilities = array(
+	'block/people:addinstance' => array(
+		'riskbitmask' => RISK_SPAM | RISK_XSS,
+		'captype' => 'write',
+		'contextlevel' => CONTEXT_BLOCK,
+		'archetypes' => array(
+			'editingteacher' => CAP_ALLOW,
+			'manager' => CAP_ALLOW
+		),
+		'clonepermissionsfrom' => 'moodle/site:manageblocks'
+	),
+);

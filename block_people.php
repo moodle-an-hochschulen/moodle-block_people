@@ -97,7 +97,7 @@ class block_people extends block_base {
 
 						if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext)) {
 							$this->content->text .= html_writer::start_tag('a', array('href' => new moodle_url('/message/index.php', array('id' => $t->id)), 'title' => get_string('sendmessageto', 'core_message', $t->firstname.' '.$t->lastname)));
-								$this->content->text .= html_writer::empty_tag('img', array('src' => $OUTPUT->pix_url('i/email'), 'class' => 'icon', 'alt' => get_string('sendmessageto', 'core_message', $t->firstname.' '.$t->lastname)));
+								$this->content->text .= html_writer::empty_tag('img', array('src' => $OUTPUT->pix_url('t/email'), 'class' => 'icon', 'alt' => get_string('sendmessageto', 'core_message', $t->firstname.' '.$t->lastname)));
 							$this->content->text .= html_writer::end_tag('a');
 						}
 					$this->content->text .= html_writer::end_tag('div');
