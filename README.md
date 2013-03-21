@@ -10,6 +10,7 @@ This plugin requires Moodle 2.4+
 
 Changes
 =======
+2013-03-18 - Fix php strict standards bug, fix small performance issue, Code cleanup according to moodle codechecker
 2013-02-18 - Check compatibility for Moodle 2.4
 2012-12-17 - New Feature: Block supports role names which have been renamed in course context
 2012-11-30 - Bugfix: Block couldn't be added to frontpage, therefore it couldn't be used as sticky block
@@ -82,6 +83,13 @@ Moodle release support
 Due to limited ressources, block_people is only maintained for the most recent major release of Moodle. However, previous versions of this plugin which work in legacy major releases of Moodle are still available as-is without any further updates in the Moodle Plugins repository.
 
 There may be several weeks after a new major release of Moodle has been published until I can do a compatibility check and fix problems if necessary. If you encounter problems with a new major release of Moodle - or can confirm that block_people still works with a new major relase - please let me know on https://github.com/abias/moodle-block_people/issues
+
+
+Right-to-left support
+=====================
+This plugin has not been tested with Moodle's support for right-to-left (RTL) languages.
+If you want to use this plugin with a RTL language and it doesn't work as-is, you are free to send me a pull request on
+github with modifications.
 
 
 Copyright
