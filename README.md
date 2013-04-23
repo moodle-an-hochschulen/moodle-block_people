@@ -10,6 +10,7 @@ This plugin requires Moodle 2.4+
 
 Changes
 =======
+2013-04-23 - Add required capability for placing block on MyMoodle page
 2013-03-18 - Fix php strict standards bug, fix small performance issue, Code cleanup according to moodle codechecker
 2013-02-18 - Check compatibility for Moodle 2.4
 2012-12-17 - New Feature: Block supports role names which have been renamed in course context

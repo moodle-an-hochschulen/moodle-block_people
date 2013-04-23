@@ -77,7 +77,7 @@ class block_people extends block_base {
             $teachers = get_role_users($teacherroles, $currentcontext, true, 'u.id, u.lastname, u.firstname, u.picture, u.imagealt, u.email, r.id AS role, r.sortorder', 'r.sortorder, u.lastname, u.firstname ASC');
         }
 
-        // Get global role names and get role name aliases which have been renamed in course context
+        // Get global role names and get role name aliases which have been renamed in course context (TODO: Alias handling could be done easier with core role_fix_names() function)
         $sql = 'SELECT r.id, r.name AS name, rn.name AS alias
                 FROM {role} r
                 LEFT OUTER JOIN {role_names} rn ON r.id = rn.roleid AND rn.contextid = ?';

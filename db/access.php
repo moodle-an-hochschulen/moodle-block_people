@@ -17,6 +17,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
+    'block/people:myaddinstance' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM
+    ),
     'block/people:addinstance' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
