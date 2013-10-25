@@ -47,7 +47,7 @@ class block_people extends block_base {
     }
 
     function get_content() {
-        global $COURSE, $CFG, $DB, $OUTPUT;
+        global $COURSE, $CFG, $DB, $OUTPUT, $USER;
 
         if ($this->content !== null) {
             return $this->content;
@@ -66,46 +66,32 @@ class block_people extends block_base {
         // Get context
         $currentcontext = $this->page->context;
 
-        // Prepare multilang filter
-        require_once(dirname(dirname(dirname(__FILE__))).'/filter/multilang/filter.php');
-        $filter = new filter_multilang($currentcontext, array());
-
-        // Get teachers ordered by roles
+        // Get teachers separated by roles
         $CFG->coursecontact = trim($CFG->coursecontact);
         if (!empty($CFG->coursecontact)) {
             $teacherroles = explode(',', $CFG->coursecontact);
-            $teachers = get_role_users($teacherroles, $currentcontext, true, 'u.id, u.lastname, u.firstname, u.picture, u.imagealt, u.email, r.id AS role, r.sortorder', 'r.sortorder, u.lastname, u.firstname ASC');
+            foreach($teacherroles as $tr) {
+                $teachers[$tr] = get_role_users($tr, $currentcontext, true, 'u.id, u.lastname, u.firstname, u.picture, u.imagealt, u.email', 'u.lastname ASC, u.firstname ASC');
+            }
         }
 
-        // Get global role names and get role name aliases which have been renamed in course context (TODO: Alias handling could be done easier with core role_fix_names() function)
-        $sql = 'SELECT r.id, r.name AS name, rn.name AS alias
-                FROM {role} r
-                LEFT OUTER JOIN {role_names} rn ON r.id = rn.roleid AND rn.contextid = ?';
-        $rolenames = $DB->get_records_sql($sql, array($currentcontext->id));
+        // Get role names / aliases in course context
+        $rolenames = role_get_names($currentcontext, ROLENAME_ALIAS, true);
 
-        // Output teachers
-        if (!empty($teachers)) {
-            $this->content->text .= html_writer::start_tag('div', array('class' => 'teachers'));
+        // Start teachers list
+        $this->content->text .= html_writer::start_tag('div', array('class' => 'teachers'));
 
-            $currentrole = 0;
-            foreach ($teachers as $t) {
-                // Write heading and open new list if we get a new bunch of role members
-                if ($currentrole != $t->role) {
-                    if ($currentrole != 0) {
-                        $this->content->text .= html_writer::end_tag('ul');
-                    }
-                    if ($rolenames[$t->role]->alias) {
-                        $this->content->text .= html_writer::tag('h3', $filter->filter($rolenames[$t->role]->alias));
-                    }
-                    else {
-                        $this->content->text .= html_writer::tag('h3', $filter->filter($rolenames[$t->role]->name));
-                    }
-                    $this->content->text .= html_writer::start_tag('ul');
-                    $currentrole = $t->role;
-                }
+        // Check every teacherrole
+        foreach ($teachers as $id => $tr) {
+            if (count($tr) > 0) {
+                // Write heading and open new list
+                $this->content->text .= html_writer::tag('h3', $rolenames[$id]);
+                $this->content->text .= html_writer::start_tag('ul');
 
-                // Output teacher
-                $this->content->text .= html_writer::start_tag('li');
+                // Do for every teacher with this role
+                foreach ($tr as $t) {
+                    // Output teacher
+                    $this->content->text .= html_writer::start_tag('li');
 
                     // create user object for picture output
                     $user = new stdClass();
@@ -127,18 +113,23 @@ class block_people extends block_base {
                             $this->content->text .= html_writer::end_tag('a');
                         }
 
-                        if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext)) {
+                        if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $t->id != $USER->id) {
                             $this->content->text .= html_writer::start_tag('a', array('href' => new moodle_url('/message/index.php', array('id' => $t->id)), 'title' => get_string('sendmessageto', 'core_message', fullname($t))));
                                 $this->content->text .= html_writer::empty_tag('img', array('src' => $OUTPUT->pix_url('t/email'), 'class' => 'icon', 'alt' => get_string('sendmessageto', 'core_message', fullname($t))));
                             $this->content->text .= html_writer::end_tag('a');
                         }
                     $this->content->text .= html_writer::end_tag('div');
-                $this->content->text .= html_writer::end_tag('li');
-            }
 
-            $this->content->text .= html_writer::end_tag('ul');
-            $this->content->text .= html_writer::end_tag('div');
+                    $this->content->text .= html_writer::end_tag('li');
+                }
+
+                // End list
+                $this->content->text .= html_writer::end_tag('ul');
+            }
         }
+
+        // End teachers list
+        $this->content->text .= html_writer::end_tag('div');
 
         // Output participant list
         $this->content->text .= html_writer::start_tag('div', array('class' => 'participants'));

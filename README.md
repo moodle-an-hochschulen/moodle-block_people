@@ -10,6 +10,7 @@ This plugin requires Moodle 2.5+
 
 Changes
 =======
+2013-10-15 - Bugfix: Block didn't respect course members which have multiple roles, now those members are listed with all of their roles
 2013-07-30 - Transfer Github repository from github.com/abias/... to github.com/moodleuulm/...; Please update your Git paths if necessary
 2013-07-30 - Check compatibility for Moodle 2.5, no functionality change
 2013-04-23 - Add required capability for placing block on MyMoodle page
