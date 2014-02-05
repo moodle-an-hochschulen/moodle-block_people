@@ -5,11 +5,12 @@ Moodle block which displays all teachers of a course with contact quicklinks, as
 
 Requirements
 ============
-This plugin requires Moodle 2.5+
+This plugin requires Moodle 2.6+
 
 
 Changes
 =======
+2014-01-31 - Check compatibility for Moodle 2.6, no functionality change
 2013-10-15 - Bugfix: Block didn't respect course members which have multiple roles, now those members are listed with all of their roles
 2013-07-30 - Transfer Github repository from github.com/abias/... to github.com/moodleuulm/...; Please update your Git paths if necessary
 2013-07-30 - Check compatibility for Moodle 2.5, no functionality change
@@ -29,14 +30,14 @@ Installation
 Install the plugin like any other plugin to folder
 /blocks/people
 
-See http://docs.moodle.org/25/en/Installing_plugins for details on installing Moodle plugins
+See http://docs.moodle.org/26/en/Installing_plugins for details on installing Moodle plugins
 
 
 Placement
 =========
 block_people is used ideally as sticky block and appears on all of your course pages at the same position
 
-See http://docs.moodle.org/25/en/Block_settings#Making_a_block_sticky_throughout_the_whole_site for details about sticky blocks
+See http://docs.moodle.org/26/en/Block_settings#Making_a_block_sticky_throughout_the_whole_site for details about sticky blocks
 
 
 Usage
@@ -60,15 +61,15 @@ block_people gets the list of teacher roles from $CFG->coursecontact. With this 
 2. Quicklink for teachers
 -------------------------
 block_people only shows a quicklink to the teacher's profile if the user has the capability moodle/user:viewdetails
-See http://docs.moodle.org/25/en/Capabilities/moodle/user:viewdetails for details on this capability
+See http://docs.moodle.org/26/en/Capabilities/moodle/user:viewdetails for details on this capability
 
 block_people only shows a quicklink to the message system if the user has the capability moodle/site:sendmessage and if the Moodle message system is turnes on ($CFG->messaging)
-See http://docs.moodle.org/25/en/Capabilities/moodle/site:sendmessage for details on this capability and http://docs.moodle.org/25/en/Messaging for details on the messaging system
+See http://docs.moodle.org/26/en/Capabilities/moodle/site:sendmessage for details on this capability and http://docs.moodle.org/26/en/Messaging for details on the messaging system
 
 3. Participants List
 --------------------
 block_people only shows the link to the participants list if the user has the capability moodle/course:viewparticipants.
-See http://docs.moodle.org/25/en/Capabilities/moodle/course:viewparticipants for details on this capability
+See http://docs.moodle.org/26/en/Capabilities/moodle/course:viewparticipants for details on this capability
 
 4. Roles sort order
 -------------------

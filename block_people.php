@@ -71,7 +71,7 @@ class block_people extends block_base {
         if (!empty($CFG->coursecontact)) {
             $teacherroles = explode(',', $CFG->coursecontact);
             foreach($teacherroles as $tr) {
-                $teachers[$tr] = get_role_users($tr, $currentcontext, true, 'u.id, u.lastname, u.firstname, u.picture, u.imagealt, u.email', 'u.lastname ASC, u.firstname ASC');
+                $teachers[$tr] = get_role_users($tr, $currentcontext, true, 'u.id, u.lastname, u.firstname, u.firstnamephonetic, u. lastnamephonetic, u.middlename, u.alternatename, u.picture, u.imagealt, u.email', 'u.lastname ASC, u.firstname ASC');
             }
         }
 
@@ -98,6 +98,10 @@ class block_people extends block_base {
                     $user->id = $t->id;
                     $user->lastname = $t->lastname;
                     $user->firstname = $t->firstname;
+                    $user->lastnamephonetic = $t->lastnamephonetic;
+                    $user->firstnamephonetic = $t->firstnamephonetic;
+                    $user->middlename = $t->middlename;
+                    $user->alternatename = $t->alternatename;
                     $user->picture = $t->picture;
                     $user->imagealt = $t->imagealt;
                     $user->email = $t->email;
