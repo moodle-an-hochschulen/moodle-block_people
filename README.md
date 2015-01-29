@@ -5,11 +5,12 @@ Moodle block which displays all teachers of a course with contact quicklinks, as
 
 Requirements
 ------------
-This plugin requires Moodle 2.7+
+This plugin requires Moodle 2.8+
 
 
 Changes
 -------
+* 2015-01-29 - Check compatibility for Moodle 2.8, no functionality change
 * 2014-08-29 - Update README file
 * 2014-06-30 - Drop support for Non-Bootstrap based themes
 * 2014-06-30 - Check compatibility for Moodle 2.7, no functionality change
