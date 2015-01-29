@@ -1,30 +1,36 @@
 .block_people .teachers ul,
 .block_people .teachers li {
-        list-style: none;
-        margin-left: 0;
+    list-style: none;
+    margin-left: 0;
 }
 
 .block_people .teachers li {
-        margin-bottom: 10px;
-        clear: both;
+    margin-bottom: 10px;
+    clear: both;
 }
 
 .block_people .teachers .icons {
-        display: block;
+    display: block;
 }
 
 .block_people .teachers .icons img,
 .block_people .participants img {
-        margin-right: 5px;
+    margin-right: 5px;
+}
+
+.block_people .content .teachers h3,
+.block_people .content .participants h3 {
+    padding-left: 0;
+    clear: both;
 }
 
 .block_people .content .teachers .userpicture {
-        float: left;
-        margin-right: 10px;
-        width: inherit;
-        height: inherit;
+    float: left;
+    margin-right: 10px;
+    width: inherit;
+    height: inherit;
 }
 
 .block_people .participants .hint {
-        font-size: 90% !important;
+    font-size: 90% !important;
 }

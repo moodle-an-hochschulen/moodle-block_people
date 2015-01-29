@@ -106,10 +106,19 @@ class block_people extends block_base {
                     $user->imagealt = $t->imagealt;
                     $user->email = $t->email;
 
-                    $this->content->text .= $OUTPUT->user_picture($user, array('size' => 30, 'link' => true, 'courseid' => $COURSE->id));
-                    $this->content->text .= html_writer::start_tag('div', array('class' => 'name'));
-                    $this->content->text .= fullname($t);
+                    $this->content->text .= html_writer::start_tag('div', array('class' => 'image'));
+                        if (has_capability('moodle/user:viewdetails', $currentcontext)) {
+                            $this->content->text .= $OUTPUT->user_picture($user, array('size' => 30, 'link' => true, 'courseid' => $COURSE->id));
+                        }
+                        else {
+                            $this->content->text .= $OUTPUT->user_picture($user, array('size' => 30, 'link' => false, 'courseid' => $COURSE->id));
+                        }
                     $this->content->text .= html_writer::end_tag('div');
+
+                    $this->content->text .= html_writer::start_tag('div', array('class' => 'name'));
+                        $this->content->text .= fullname($t);
+                    $this->content->text .= html_writer::end_tag('div');
+
                     $this->content->text .= html_writer::start_tag('div', array('class' => 'icons'));
                         if (has_capability('moodle/user:viewdetails', $currentcontext)) {
                             $this->content->text .= html_writer::start_tag('a', array('href' => new moodle_url('/user/view.php', array('id' => $t->id, 'course' => $COURSE->id)), 'title' => get_string('viewprofile', 'core')));

@@ -13,6 +13,7 @@ This plugin requires Moodle 2.8+
 Changes
 -------
 
+* 2015-01-29 - Improve layout and remove link to profile when user does not see profile icons
 * 2015-01-29 - Check compatibility for Moodle 2.8, no functionality change
 * 2014-08-29 - Update README file
 * 2014-06-30 - Drop support for Non-Bootstrap based themes
