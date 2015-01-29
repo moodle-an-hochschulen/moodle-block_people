@@ -82,7 +82,7 @@ block_people shows teacher role groups in the order defined in /admin/roles/mana
 
 Further information
 -------------------
-block_people is found in the Moodle Plugins repository: http://moodle.org/plugins/view.php?plugin=block_people
+block_people is found in the Moodle Plugins repository: http://moodle.org/plugins/view/block_people
 
 Report a bug or suggest an improvement: https://github.com/moodleuulm/moodle-block_people/issues
 
