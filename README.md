@@ -13,6 +13,7 @@ This plugin requires Moodle 2.9+
 Changes
 -------
 
+* 2015-08-21 - Change My Moodle to Dashboard in language pack
 * 2015-08-18 - Check compatibility for Moodle 2.9, no functionality change
 * 2015-01-29 - Improve layout and remove link to profile when user does not see profile icons
 * 2015-01-29 - Check compatibility for Moodle 2.8, no functionality change
