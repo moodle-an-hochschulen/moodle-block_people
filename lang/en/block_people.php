@@ -17,10 +17,9 @@
 /**
  * Block "people" - Language pack
  *
- * @package     block
- * @subpackage  block_people
- * @copyright   2013 Alexander Bias, University of Ulm <alexander.bias@uni-ulm.de>
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    block_people
+ * @copyright  2013 Alexander Bias, University of Ulm <alexander.bias@uni-ulm.de>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
