@@ -7,12 +7,13 @@ Moodle block which displays all teachers of a course with contact quicklinks, as
 Requirements
 ------------
 
-This plugin requires Moodle 3.0+
+This plugin requires Moodle 3.1+
 
 
 Changes
 -------
 
+* 2016-07-19 - Check compatibility for Moodle 3.1, no functionality change
 * 2016-03-07 - Workaround: Add non-breaking space to block title because otherwise the Moodle CLI installer fails due to a duplicate title with block_partipants. The space should not have a big visual impact.
 * 2016-02-10 - Change plugin version and release scheme to the scheme promoted by moodle.org, no functionality change
 * 2016-01-01 - Check compatibility for Moodle 3.0, no functionality change
