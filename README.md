@@ -13,7 +13,7 @@ This plugin requires Moodle 3.1+
 Changes
 -------
 
-* 2016-10-26 - Add global plugin settings and instance settings for role list customization other than course contact setting
+* 2016-11-03 - Add global plugin settings and instance settings for role list customization other than course contact setting
 * 2016-07-19 - Check compatibility for Moodle 3.1, no functionality change
 * 2016-03-07 - Workaround: Add non-breaking space to block title because otherwise the Moodle CLI installer fails due to a duplicate title with block_partipants. The space should not have a big visual impact.
 * 2016-02-10 - Change plugin version and release scheme to the scheme promoted by moodle.org, no functionality change
