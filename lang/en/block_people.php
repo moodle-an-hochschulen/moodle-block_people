@@ -28,4 +28,22 @@ $string['pluginname'] = 'People';
 $string['participantslist'] = 'Show participants list';
 $string['people:addinstance'] = 'Add a new people block';
 $string['people:myaddinstance'] = 'Add a new people block to Dashboard';
+$string['people:overrideglobalsettings'] = 'Override global plugin settings';
 $string['noparticipantslist'] = 'Viewing the participants list is prohibited in this course';
+
+// Settings.
+$string['overridecoursecontact'] = 'Override course contacts';
+$string['overridecoursecontact_help'] = 'Override global core setting coursecontact with a different roles list.';
+$string['defaultroles'] = 'Default listed roles';
+$string['defaultroles_help'] = 'List of roles to be shown by default in the block when course contact override is enabled.';
+$string['allowinstanceoverride'] = 'Allow instance override';
+$string['allowinstanceoverride_help'] = 'Allow override of default settings in block instances';
+$string['overridableroles'] = 'Available roles for instance override';
+$string['overridableroles_help'] = 'List of available roles in block instance\'s settings when local override is allowed.';
+
+$string['overridedefaultroles'] = 'Override default roles';
+$string['overridedefaultroles_help'] = 'List of available roles in block instance\'s settings when local override is allowed.';
+$string['instanceroles'] = 'Overridedefaultroles';
+$string['instanceroles_help'] = 'List of available roles in block instance\'s settings when local override is allowed.';
+
+$string['overridenotallowed'] = 'Instance override of default settings is not allowed';
