@@ -25,27 +25,35 @@
 defined('MOODLE_INTERNAL') || die();
 
 class block_people extends block_base {
-    function init() {
-        $this->title = get_string('pluginname', 'block_people').'&nbsp;'; // Non-breaking space is added because otherwise the Moodle CLI installer fails due to a duplicate block title with block_partipants. The space should not have a big visual impact.
+
+    public function init() {
+        /* Non-breaking space is added because otherwise the Moodle CLI installer fails due
+           to a duplicate block title with block_partipants.
+           The space should not have a big visual impact. */
+        $this->title = get_string('pluginname', 'block_people') . '&nbsp;';
     }
 
-    function applicable_formats() {
+    public function applicable_formats() {
         return array('course-view' => true, 'site' => true);
     }
 
-    function has_config() {
-        return false;
-    }
-
-    function instance_allow_multiple() {
-        return false;
-    }
-
-    function instance_can_be_hidden() {
+    public function has_config() {
         return true;
     }
 
-    function get_content() {
+    public function instance_allow_config() {
+        return true;
+    }
+
+    public function instance_allow_multiple() {
+        return false;
+    }
+
+    public function instance_can_be_hidden() {
+        return true;
+    }
+
+    public function get_content() {
         global $COURSE, $CFG, $DB, $OUTPUT, $USER;
 
         if ($this->content !== null) {
@@ -57,42 +65,63 @@ class block_people extends block_base {
             return $this->content;
         }
 
-        // Prepare output
+        // Prepare output.
         $this->content = new stdClass();
         $this->content->text = '';
         $this->content->footer = '';
 
-        // Get context
+        // Get context.
         $currentcontext = $this->page->context;
 
-        // Get teachers separated by roles
-        $CFG->coursecontact = trim($CFG->coursecontact);
-        if (!empty($CFG->coursecontact)) {
-            $teacherroles = explode(',', $CFG->coursecontact);
-            foreach($teacherroles as $tr) {
-                $teachers[$tr] = get_role_users($tr, $currentcontext, true, 'u.id, u.lastname, u.firstname, u.firstnamephonetic, u. lastnamephonetic, u.middlename, u.alternatename, u.picture, u.imagealt, u.email', 'u.lastname ASC, u.firstname ASC');
+        require_once($CFG->dirroot . '/blocks/people/lib.php');
+
+        // Get roles from instance settings or default settings.
+        $rolesvisualization = block_people_get_roles_visualization($this);
+        $roles = block_people_get_roles_to_be_shown($this, $rolesvisualization);
+        // Get teachers separated by roles.
+        $teachers = array();
+        $fields = array(
+            'u.id',
+            'u.lastname',
+            'u.firstname',
+            'u.firstnamephonetic',
+            'u.lastnamephonetic',
+            'u.middlename',
+            'u.alternatename',
+            'u.picture',
+            'u.imagealt',
+            'u.email'
+        );
+        $sort = array(
+            'u.lastname ASC',
+            'u.firstname ASC'
+        );
+
+        if (!empty($roles)) {
+            foreach ($roles as $tr) {
+                $teachers[$tr] = get_role_users($tr, $currentcontext, true, implode(',', $fields), implode(',', $sort));
             }
         }
 
-        // Get role names / aliases in course context
+        // Get role names / aliases in course context.
         $rolenames = role_get_names($currentcontext, ROLENAME_ALIAS, true);
 
-        // Start teachers list
+        // Start teachers list.
         $this->content->text .= html_writer::start_tag('div', array('class' => 'teachers'));
 
-        // Check every teacherrole
+        // Check every teacherrole.
         foreach ($teachers as $id => $tr) {
             if (count($tr) > 0) {
-                // Write heading and open new list
+                // Write heading and open new list.
                 $this->content->text .= html_writer::tag('h3', $rolenames[$id]);
                 $this->content->text .= html_writer::start_tag('ul');
 
-                // Do for every teacher with this role
+                // Do for every teacher with this role.
                 foreach ($tr as $t) {
-                    // Output teacher
+                    // Output teacher.
                     $this->content->text .= html_writer::start_tag('li');
 
-                    // create user object for picture output
+                    // Create user object for picture output.
                     $user = new stdClass();
                     $user->id = $t->id;
                     $user->lastname = $t->lastname;
@@ -106,55 +135,90 @@ class block_people extends block_base {
                     $user->email = $t->email;
 
                     $this->content->text .= html_writer::start_tag('div', array('class' => 'image'));
-                        if (has_capability('moodle/user:viewdetails', $currentcontext)) {
-                            $this->content->text .= $OUTPUT->user_picture($user, array('size' => 30, 'link' => true, 'courseid' => $COURSE->id));
-                        }
-                        else {
-                            $this->content->text .= $OUTPUT->user_picture($user, array('size' => 30, 'link' => false, 'courseid' => $COURSE->id));
-                        }
+                    if (has_capability('moodle/user:viewdetails', $currentcontext)) {
+                        $this->content->text .= $OUTPUT->user_picture($user,
+                            array('size' => 30, 'link' => true, 'courseid' => $COURSE->id)
+                        );
+                    } else {
+                        $this->content->text .= $OUTPUT->user_picture($user,
+                            array('size' => 30, 'link' => false, 'courseid' => $COURSE->id)
+                        );
+                    }
                     $this->content->text .= html_writer::end_tag('div');
 
                     $this->content->text .= html_writer::start_tag('div', array('class' => 'name'));
-                        $this->content->text .= fullname($t);
+                    $this->content->text .= fullname($t);
                     $this->content->text .= html_writer::end_tag('div');
 
                     $this->content->text .= html_writer::start_tag('div', array('class' => 'icons'));
-                        if (has_capability('moodle/user:viewdetails', $currentcontext)) {
-                            $this->content->text .= html_writer::start_tag('a', array('href' => new moodle_url('/user/view.php', array('id' => $t->id, 'course' => $COURSE->id)), 'title' => get_string('viewprofile', 'core')));
-                            $this->content->text .= html_writer::empty_tag('img', array('src' => $OUTPUT->pix_url('i/user'), 'class' => 'icon', 'alt' => get_string('viewprofile', 'core')));
-                            $this->content->text .= html_writer::end_tag('a');
-                        }
+                    if (has_capability('moodle/user:viewdetails', $currentcontext)) {
+                        $this->content->text .= html_writer::start_tag('a',
+                            array(
+                                'href' => new moodle_url('/user/view.php', array('id' => $t->id, 'course' => $COURSE->id)),
+                                'title' => get_string('viewprofile', 'core')
+                            )
+                        );
+                        $this->content->text .= html_writer::empty_tag('img',
+                            array(
+                                'src' => $OUTPUT->pix_url('i/user'),
+                                'class' => 'icon',
+                                'alt' => get_string('viewprofile', 'core')
+                            )
+                        );
+                        $this->content->text .= html_writer::end_tag('a');
+                    }
 
-                        if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $t->id != $USER->id) {
-                            $this->content->text .= html_writer::start_tag('a', array('href' => new moodle_url('/message/index.php', array('id' => $t->id)), 'title' => get_string('sendmessageto', 'core_message', fullname($t))));
-                                $this->content->text .= html_writer::empty_tag('img', array('src' => $OUTPUT->pix_url('t/email'), 'class' => 'icon', 'alt' => get_string('sendmessageto', 'core_message', fullname($t))));
-                            $this->content->text .= html_writer::end_tag('a');
-                        }
+                    if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $t->id != $USER->id) {
+                        $this->content->text .= html_writer::start_tag('a',
+                            array(
+                                'href' => new moodle_url('/message/index.php', array('id' => $t->id)),
+                                'title' => get_string('sendmessageto', 'core_message', fullname($t))
+                            )
+                        );
+                        $this->content->text .= html_writer::empty_tag('img',
+                            array(
+                                'src' => $OUTPUT->pix_url('t/email'),
+                                'class' => 'icon',
+                                'alt' => get_string('sendmessageto', 'core_message', fullname($t))
+                            )
+                        );
+                        $this->content->text .= html_writer::end_tag('a');
+                    }
                     $this->content->text .= html_writer::end_tag('div');
 
                     $this->content->text .= html_writer::end_tag('li');
                 }
 
-                // End list
+                // End list.
                 $this->content->text .= html_writer::end_tag('ul');
             }
         }
 
-        // End teachers list
+        // End teachers list.
         $this->content->text .= html_writer::end_tag('div');
 
-        // Output participant list
+        // Output participant list.
         $this->content->text .= html_writer::start_tag('div', array('class' => 'participants'));
         $this->content->text .= html_writer::tag('h3', get_string('participants'));
 
-        // Only if user is allow to see participants list
+        // Only if user is allow to see participants list.
         if (has_capability('moodle/course:viewparticipants', $currentcontext)) {
-            $this->content->text .= html_writer::start_tag('a', array('href' => new moodle_url('/user/index.php', array('contextid' => $currentcontext->id)), 'title' => get_string('participants')));
-            $this->content->text .= html_writer::empty_tag('img', array('src' => $OUTPUT->pix_url('i/users'), 'class' => 'icon', 'alt' => get_string('participants')));
+            $this->content->text .= html_writer::start_tag('a',
+                array(
+                    'href' => new moodle_url('/user/index.php', array('contextid' => $currentcontext->id)),
+                    'title' => get_string('participants')
+                )
+            );
+            $this->content->text .= html_writer::empty_tag('img',
+                array(
+                    'src' => $OUTPUT->pix_url('i/users'),
+                    'class' => 'icon',
+                    'alt' => get_string('participants')
+                )
+            );
             $this->content->text .= get_string('participantslist', 'block_people');
             $this->content->text .= html_writer::end_tag('a');
-        }
-        else {
+        } else {
             $this->content->text .= html_writer::start_tag('span', array('class' => 'hint'));
             $this->content->text .= get_string('noparticipantslist', 'block_people');
             $this->content->text .= html_writer::end_tag('span');

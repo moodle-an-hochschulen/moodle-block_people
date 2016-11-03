@@ -13,6 +13,7 @@ This plugin requires Moodle 3.1+
 Changes
 -------
 
+* 2016-11-03 - Add global plugin settings and instance settings for role list customization other than course contact setting
 * 2016-07-19 - Check compatibility for Moodle 3.1, no functionality change
 * 2016-03-07 - Workaround: Add non-breaking space to block title because otherwise the Moodle CLI installer fails due to a duplicate title with block_partipants. The space should not have a big visual impact.
 * 2016-02-10 - Change plugin version and release scheme to the scheme promoted by moodle.org, no functionality change
@@ -71,13 +72,29 @@ block_people should work with all Bootstrap based Moodle themes.
 Settings
 --------
 
-block_people has neither a settings page nor settings in config.php. Nevertheless, there are some Moodle settings it responds to:
+block_people has a plugin settings page and also has instance settings. 
 
-### 1. List of teachers
+### 1. List of roles to be shown
 
-block_people gets the list of teacher roles from $CFG->coursecontact. With this Moodle core setting, you can define which roles are displayed in block_people's list of teachers.
+block_people gets the list of roles to be shown in three different way, depending on settings.
 
-### 2. Quicklink for teachers
+##### Course contact ($CFG->coursecontact)
+With this Moodle core setting (Site administration -> Appearance -> Courses), you can define which roles are displayed in block_people's list of people.
+If plugin settings are not enabled, this is the default visualization mode.
+
+##### Plugin settings
+Within the plugin settings the core setting $CFG->coursecontact can be overridden, selecting a new list of roles to be shown in block instances.
+In the plugin settings can also be allowed the instance override of plugin settings, selecting which roles can be overridden and which ones not.
+
+##### Instance settings
+If allowed by plugin settings, you can also decide to select a specific list of roles to be shown for a single instance, from the available ones.
+
+Other settings
+--------
+
+Other than specific settings, block_people responds to other Moodle settings:
+
+### 1. Quicklink for teachers
 
 block_people only shows a quicklink to the teacher's profile if the user has the capability moodle/user:viewdetails
 See http://docs.moodle.org/en/Capabilities/moodle/user:viewdetails for details on this capability
@@ -85,12 +102,12 @@ See http://docs.moodle.org/en/Capabilities/moodle/user:viewdetails for details o
 block_people only shows a quicklink to the message system if the user has the capability moodle/site:sendmessage and if the Moodle message system is turnes on ($CFG->messaging)
 See http://docs.moodle.org/en/Capabilities/moodle/site:sendmessage for details on this capability and http://docs.moodle.org/en/Messaging for details on the messaging system
 
-### 3. Participants List
+### 2. Participants List
 
 block_people only shows the link to the participants list if the user has the capability moodle/course:viewparticipants.
 See http://docs.moodle.org/en/Capabilities/moodle/course:viewparticipants for details on this capability
 
-### 4. Roles sort order
+### 3. Roles sort order
 
 block_people shows teacher role groups in the order defined in /admin/roles/manage.php. Please visit this settings page if you want to modify the sort order
 
