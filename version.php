@@ -28,4 +28,4 @@ $plugin->component = 'block_people';
 $plugin->version = 2016110300;
 $plugin->release = 'v3.1-r3';
 $plugin->requires = 2016052300;
-$plugin->maturity = MATURITY_BETA;
+$plugin->maturity = MATURITY_STABLE;
