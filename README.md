@@ -7,7 +7,7 @@ Moodle block which displays all teachers of a course with contact quicklinks, as
 Requirements
 ------------
 
-This plugin requires Moodle 3.1+
+This plugin requires Moodle 3.2+
 
 
 Installation
