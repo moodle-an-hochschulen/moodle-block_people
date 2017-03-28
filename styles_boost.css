@@ -1,0 +1,14 @@
+.block_people .teachers h3,
+.block_people .participants h3 {
+    font-size: 1.143rem;
+    font-weight: 500;
+}
+
+.block_people .teachers ul {
+    border-bottom: 1px solid #eee;
+    padding-left: 0;
+}
+
+.block_people .teachers .icons img {
+    margin-left: 0;
+}

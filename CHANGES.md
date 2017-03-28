@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2017-03-28 - Improve the list layout in theme_boost
+
 ### v3.2-r1
 
 * 2017-01-12 - Check compatibility for Moodle 3.2, no functionality change
