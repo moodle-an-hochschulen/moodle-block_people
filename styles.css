@@ -5,8 +5,8 @@
 }
 
 .block_people .teachers li {
-    margin-bottom: 10px;
     clear: both;
+    margin-bottom: 10px;
 }
 
 .block_people .teachers .icons {
@@ -20,15 +20,15 @@
 
 .block_people .content .teachers h3,
 .block_people .content .participants h3 {
-    padding-left: 0;
     clear: both;
+    padding-left: 0;
 }
 
 .block_people .content .teachers .userpicture {
     float: left;
+    height: inherit;
     margin-right: 10px;
     width: inherit;
-    height: inherit;
 }
 
 .block_people .participants .hint {
