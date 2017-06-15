@@ -1,6 +1,8 @@
 moodle-block_people
 ===================
 
+[![Build Status](https://travis-ci.org/moodleuulm/moodle-block_people.svg?branch=master)](https://travis-ci.org/moodleuulm/moodle-block_people)
+
 Moodle block which displays all teachers of a course with contact quicklinks, as well as a quicklink to the participants list
 
 
