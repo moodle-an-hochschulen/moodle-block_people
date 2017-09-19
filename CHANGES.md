@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v3.2-r5
 
 * 2017-09-19 - Setting to display link to the participants page within the block.
 
