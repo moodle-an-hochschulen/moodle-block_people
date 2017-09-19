@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2017-09-19 - Setting to display link to the participants page within the block.
+
 ### v3.2-r4
 
 * 2017-05-29 - Add Travis CI support

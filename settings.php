@@ -15,21 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Block "people" - Language pack
+ * Block "People" - Settings
  *
  * @package    block_people
- * @copyright  2013 Alexander Bias, Ulm University <alexander.bias@uni-ulm.de>
+ * @copyright  2017 Kathrin Osswald, Ulm University <kathrin.osswald@uni-ulm.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'People';
-$string['participantslist'] = 'Show participants list';
-$string['people:addinstance'] = 'Add a new people block';
-$string['people:myaddinstance'] = 'Add a new people block to Dashboard';
-$string['noparticipantslist'] = 'Viewing the participants list is prohibited in this course';
+if ($ADMIN->fulltree) {
+    // Setting to show link to the participants page within the block.
+    $name = 'block_people/linkparticipantspage';
+    $title = get_string('setting_linkparticipantspage', 'block_people', null, true);
+    $description = get_string('setting_linkparticipantspage_desc', 'block_people', null, true);
+    $settings->add(new admin_setting_configcheckbox($name, $title, $description, '1'));
+}
 
-// Settings.
-$string['setting_linkparticipantspage'] = 'Show link to the participants page';
-$string['setting_linkparticipantspage_desc'] = 'By enabling this setting, a link to the participants page of the course will be shown within the block.';

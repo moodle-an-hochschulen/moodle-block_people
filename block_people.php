@@ -55,7 +55,7 @@ class block_people extends block_base {
      * @return bool
      */
     public function has_config() {
-        return false;
+        return true;
     }
 
     /**
@@ -192,28 +192,30 @@ class block_people extends block_base {
         // End teachers list.
         $this->content->text .= html_writer::end_tag('div');
 
-        // Output participant list.
-        $this->content->text .= html_writer::start_tag('div', array('class' => 'participants'));
-        $this->content->text .= html_writer::tag('h3', get_string('participants'));
+        // Output participants list if the setting linkparticipantspage is enabled.
+        if ((get_config('block_people', 'linkparticipantspage')) !== '0') {
+            $this->content->text .= html_writer::start_tag('div', array('class' => 'participants'));
+            $this->content->text .= html_writer::tag('h3', get_string('participants'));
 
-        // Only if user is allow to see participants list.
-        if (has_capability('moodle/course:viewparticipants', $currentcontext)) {
-            $this->content->text .= html_writer::start_tag('a',
-                    array('href' => new moodle_url('/user/index.php', array('contextid' => $currentcontext->id)),
-                            'title' => get_string('participants')));
-            $this->content->text .= html_writer::empty_tag('img',
-                    array('src' => $OUTPUT->pix_url('i/users'),
-                            'class' => 'icon',
-                            'alt' => get_string('participants')));
-            $this->content->text .= get_string('participantslist', 'block_people');
-            $this->content->text .= html_writer::end_tag('a');
-        } else {
-            $this->content->text .= html_writer::start_tag('span', array('class' => 'hint'));
-            $this->content->text .= get_string('noparticipantslist', 'block_people');
-            $this->content->text .= html_writer::end_tag('span');
+            // Only if user is allow to see participants list.
+            if (has_capability('moodle/course:viewparticipants', $currentcontext)) {
+                $this->content->text .= html_writer::start_tag('a',
+                    array('href'  => new moodle_url('/user/index.php', array('contextid' => $currentcontext->id)),
+                          'title' => get_string('participants')));
+                $this->content->text .= html_writer::empty_tag('img',
+                    array('src'   => $OUTPUT->pix_url('i/users'),
+                          'class' => 'icon',
+                          'alt'   => get_string('participants')));
+                $this->content->text .= get_string('participantslist', 'block_people');
+                $this->content->text .= html_writer::end_tag('a');
+            } else {
+                $this->content->text .= html_writer::start_tag('span', array('class' => 'hint'));
+                $this->content->text .= get_string('noparticipantslist', 'block_people');
+                $this->content->text .= html_writer::end_tag('span');
+            }
+
+            $this->content->text .= html_writer::end_tag('div');
         }
-
-        $this->content->text .= html_writer::end_tag('div');
 
         return $this->content;
     }

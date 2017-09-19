@@ -32,7 +32,17 @@ Usage & Settings
 
 After installing the plugin, it can be directly used by users and can be added to course overview pages.
 
-The plugin has neither a settings page nor settings in config.php. Nevertheless, there are some Moodle settings it responds to:
+To configure the plugin and its behaviour, please visit: 
+Site administration -> Plugins -> Blocks -> People.
+
+There, you find one setting: 
+
+### 1. Show link to the participants page
+
+By enabling this setting, a link to the participants page of the course will be shown within the block.
+
+Fixed Behaviours
+----------------
 
 ### 1. List of teachers
 
