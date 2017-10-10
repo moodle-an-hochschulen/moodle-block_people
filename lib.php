@@ -101,7 +101,7 @@ function block_people_get_roles_visualization(block_people $instance) {
     // Get settings.
     $overridecoursecontact = get_config('block_people', 'overridecoursecontact');
     $allowinstanceoverride = get_config('block_people', 'allowinstanceoverride');
-    $instanceoverride = $instance->config->overridedefaultroles;
+    $instanceoverride = isset($instance->config->overridedefaultroles) ? $instance->config->overridedefaultroles : false;
     // If overridecoursecontact is false then we use course contact as roles.
     if (!$overridecoursecontact) {
         return BLOCK_PEOPLE_SHOW_COURSE_CONTACT;
@@ -113,6 +113,10 @@ function block_people_get_roles_visualization(block_people $instance) {
     // If overridecoursecontact and instance override is not allowed, we use default.
     if ($overridecoursecontact && $allowinstanceoverride && !$instanceoverride) {
         return BLOCK_PEOPLE_SHOW_DEFAULT_ROLES;
+    }
+    // If all is active, we use instance roles.
+    if ($overridecoursecontact && $allowinstanceoverride && $instanceoverride) {
+        return BLOCK_PEOPLE_SHOW_INSTANCE_ROLES;
     }
     // If code reach this line, something is wrong and then nothing is shown.
     return BLOCK_PEOPLE_SHOW_NOTHING;
