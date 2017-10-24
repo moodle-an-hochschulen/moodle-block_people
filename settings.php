@@ -25,10 +25,40 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
+    global $CFG;
+    // Locallib for updatedcallback function.
+    require_once($CFG->dirroot.'/blocks/people/locallib.php');
+
+    // Settings title to group partictpants page related settings together with a common heading. We don't want a description here.
+    $name = 'block_people/participantspageheading';
+    $title = get_string('setting_participantspageheading', 'block_people', null, true);
+    $setting = new admin_setting_heading($name, $title, null);
+    $settings->add($setting);
+
     // Setting to show link to the participants page within the block.
     $name = 'block_people/linkparticipantspage';
     $title = get_string('setting_linkparticipantspage', 'block_people', null, true);
     $description = get_string('setting_linkparticipantspage_desc', 'block_people', null, true);
     $settings->add(new admin_setting_configcheckbox($name, $title, $description, '1'));
+
+    // Settings title to group hiding the block related settings together with a common heading. We don't want a description here.
+    $name = 'block_people/hideblockheading';
+    $title = get_string('setting_hideblockheading', 'block_people', null, true);
+    $setting = new admin_setting_heading($name, $title, null);
+    $settings->add($setting);
+
+    // Setting to disable the possibility to hide the block.
+    $name = 'block_people/hideblock';
+    $title = get_string('setting_hideblock', 'block_people', null, true);
+    $description = get_string('setting_hideblock_desc', 'block_people', null, true);
+    $settings->add(new admin_setting_configcheckbox($name, $title, $description, 1));
+
+    // Setting to make all people blocks visible again.
+    $name = 'block_people/resetvisibility';
+    $title = get_string('setting_resetvisibility', 'block_people', null, true);
+    $description = get_string('setting_resetvisibility_desc', 'block_people', null, true);
+    $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+    $setting->set_updatedcallback('block_people_reset_visibility');
+    $settings->add($setting);
 }
 

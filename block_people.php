@@ -71,7 +71,14 @@ class block_people extends block_base {
      * @return bool
      */
     public function instance_can_be_hidden() {
-        return true;
+        // By default, instances can be hidden by the user.
+        $hideblock = true;
+        // If config 'hideblock' is disabled.
+        if ((get_config('block_people', 'hideblock')) == '0') {
+            // Set value to false, so instance cannot be hidden.
+            $hideblock = false;
+        }
+        return $hideblock;
     }
 
     /**

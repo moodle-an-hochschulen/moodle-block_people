@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2017-10-24 - Settings to permit or deny users to be able to hide the block in their courses and to reset the visibility.
+
 ### v3.2-r5
 
 * 2017-09-19 - Setting to display link to the participants page within the block.

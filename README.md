@@ -35,11 +35,29 @@ After installing the plugin, it can be directly used by users and can be added t
 To configure the plugin and its behaviour, please visit: 
 Site administration -> Plugins -> Blocks -> People.
 
-There, you find one setting: 
+There, you find three settings:
 
-### 1. Show link to the participants page
+### 1. Participants page
+
+#### Show link to the participants page
 
 By enabling this setting, a link to the participants page of the course will be shown within the block.
+
+### 2. Hiding the block
+
+#### Hiding the block
+
+By enabling this setting, the block can be hidden by users.
+
+Important notice:
+Disabling this setting will entirely remove the showing / hiding the block menu item. This means, that users cannot hide this block anymore, but on the other hand, blocks that are already hidden cannot be shown anymore, too. If you want to enable this feature, consider using the following function to reset the visibility for all "block_people" instances.
+
+#### Reset visibility
+
+By enabling this checkbox, the visibility of all existing "block_people" instances will be set to visible (again).
+
+Please note:
+After saving this option, the database operations for resetting the visibility will be triggered and this checkbox will be unticked again. The next enabling and saving of this feature will trigger the database operations for resetting the visibility again.
 
 Fixed Behaviours
 ----------------
