@@ -39,7 +39,7 @@ if ($ADMIN->fulltree) {
     $name = 'block_people/linkparticipantspage';
     $title = get_string('setting_linkparticipantspage', 'block_people', null, true);
     $description = get_string('setting_linkparticipantspage_desc', 'block_people', null, true);
-    $settings->add(new admin_setting_configcheckbox($name, $title, $description, '1'));
+    $settings->add(new admin_setting_configcheckbox($name, $title, $description, 1));
 
     // Settings title to group hiding the block related settings together with a common heading. We don't want a description here.
     $name = 'block_people/hideblockheading';

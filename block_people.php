@@ -200,7 +200,7 @@ class block_people extends block_base {
         $this->content->text .= html_writer::end_tag('div');
 
         // Output participants list if the setting linkparticipantspage is enabled.
-        if ((get_config('block_people', 'linkparticipantspage')) !== '0') {
+        if ((get_config('block_people', 'linkparticipantspage')) !== 0) {
             $this->content->text .= html_writer::start_tag('div', array('class' => 'participants'));
             $this->content->text .= html_writer::tag('h3', get_string('participants'));
 
