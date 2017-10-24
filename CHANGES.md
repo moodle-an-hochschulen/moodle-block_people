@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### V3.2-r6
 
 * 2017-10-24 - Improved README.md
 * 2017-10-24 - Improved check in settings from string to integer.
