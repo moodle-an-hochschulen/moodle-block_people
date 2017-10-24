@@ -43,6 +43,11 @@ There, you find three settings:
 
 By enabling this setting, a link to the participants page of the course will be shown within the block.
 
+Please note: Even if this setting is enabled, this block only shows the link to the participants list if the user has the capability moodle/course:viewparticipants.
+If the user does not hold this capability, a hint "Viewing the participants list is prohibited in this course" will be shown in the block.
+See http://docs.moodle.org/en/Capabilities/moodle/course:viewparticipants for details on this capability.
+
+
 ### 2. Hiding the block
 
 #### Hiding the block
@@ -74,12 +79,7 @@ See http://docs.moodle.org/en/Capabilities/moodle/user:viewdetails for details o
 block_people only shows a quicklink to the message system if the user has the capability moodle/site:sendmessage and if the Moodle message system is turnes on ($CFG->messaging)
 See http://docs.moodle.org/en/Capabilities/moodle/site:sendmessage for details on this capability and http://docs.moodle.org/en/Messaging for details on the messaging system
 
-### 3. Participants List
-
-block_people only shows the link to the participants list if the user has the capability moodle/course:viewparticipants.
-See http://docs.moodle.org/en/Capabilities/moodle/course:viewparticipants for details on this capability
-
-### 4. Roles sort order
+### 3. Roles sort order
 
 block_people shows teacher role groups in the order defined in /admin/roles/manage.php. Please visit this settings page if you want to modify the sort order
 

@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2017-10-24 - Improved README.md
 * 2017-10-24 - Improved check in settings from string to integer.
 * 2017-10-24 - Settings to permit or deny users to be able to hide the block in their courses and to reset the visibility.
 
