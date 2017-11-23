@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v3.3-r1
 
 * 2017-11-23 - Replaced deprecated function $OUTPUT->pix_url() with $OUTPUT->pix_icon().
 * 2017-11-23 - Prepare compatibility for Moodle 3.3, no functionality change.
