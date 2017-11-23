@@ -27,5 +27,5 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->component = 'block_people';
 $plugin->version = 2017102400;
 $plugin->release = 'v3.2-r6';
-$plugin->requires = 2016120500;
+$plugin->requires = 2017051500;
 $plugin->maturity = MATURITY_STABLE;
