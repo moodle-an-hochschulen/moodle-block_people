@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2017-12-07 - Added Workaround to travis.yml for fixing Behat tests with TravisCI.
 * 2017-12-06 - Fixed further pix-icon displaying bugs.
 
 ### v3.3-r1
