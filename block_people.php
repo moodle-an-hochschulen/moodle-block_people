@@ -169,10 +169,8 @@ class block_people extends block_base {
                         $this->content->text .= html_writer::start_tag('a',
                                 array('href' => new moodle_url('/user/view.php', array('id' => $t->id, 'course' => $COURSE->id)),
                                         'title' => get_string('viewprofile', 'core')));
-                        $this->content->text .= html_writer::empty_tag('img',
-                                array('src' => $OUTPUT->pix_icon('i/user', 'moodle'),
-                                        'class' => 'icon',
-                                        'alt' => get_string('viewprofile', 'core')));
+                        $this->content->text .= $OUTPUT->pix_icon('i/user',
+                                get_string('viewprofile', 'core'), 'moodle');
                         $this->content->text .= html_writer::end_tag('a');
                     }
 
@@ -180,10 +178,8 @@ class block_people extends block_base {
                         $this->content->text .= html_writer::start_tag('a',
                                 array('href' => new moodle_url('/message/index.php', array('id' => $t->id)),
                                         'title' => get_string('sendmessageto', 'core_message', fullname($t))));
-                        $this->content->text .= html_writer::empty_tag('img',
-                                array('src' => $OUTPUT->pix_icon('t/email', 'moodle'),
-                                        'class' => 'icon',
-                                        'alt' => get_string('sendmessageto', 'core_message', fullname($t))));
+                        $this->content->text .= $OUTPUT->pix_icon('t/email',
+                                get_string('sendmessageto', 'core', fullname($t)), 'moodle');
                         $this->content->text .= html_writer::end_tag('a');
                     }
                     $this->content->text .= html_writer::end_tag('div');
@@ -209,10 +205,8 @@ class block_people extends block_base {
                 $this->content->text .= html_writer::start_tag('a',
                     array('href'  => new moodle_url('/user/index.php', array('contextid' => $currentcontext->id)),
                           'title' => get_string('participants')));
-                $this->content->text .= html_writer::empty_tag('img',
-                    array('src'   => $OUTPUT->pix_icon('i/users', 'moodle'),
-                          'class' => 'icon',
-                          'alt'   => get_string('participants')));
+                $this->content->text .= $OUTPUT->pix_icon('i/users',
+                        get_string('participants', 'core'), 'moodle');
                 $this->content->text .= get_string('participantslist', 'block_people');
                 $this->content->text .= html_writer::end_tag('a');
             } else {

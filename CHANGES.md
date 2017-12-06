@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2017-12-06 - Fixed further pix-icon displaying bugs.
+
 ### v3.3-r1
 
 * 2017-11-23 - Replaced deprecated function $OUTPUT->pix_url() with $OUTPUT->pix_icon().
