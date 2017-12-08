@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v3.3-r3
 
 * 2017-12-08 - Minor string bug fix.
 
