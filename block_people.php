@@ -179,7 +179,7 @@ class block_people extends block_base {
                                 array('href' => new moodle_url('/message/index.php', array('id' => $t->id)),
                                         'title' => get_string('sendmessageto', 'core_message', fullname($t))));
                         $this->content->text .= $OUTPUT->pix_icon('t/email',
-                                get_string('sendmessageto', 'core', fullname($t)), 'moodle');
+                                get_string('sendmessageto', 'core_message', fullname($t)), 'moodle');
                         $this->content->text .= html_writer::end_tag('a');
                     }
                     $this->content->text .= html_writer::end_tag('div');

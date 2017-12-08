@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2017-12-08 - Minor string bug fix.
+
 ### v3.3-r2
 
 * 2017-12-07 - Added Workaround to travis.yml for fixing Behat tests with TravisCI.
