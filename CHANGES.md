@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2017-12-12 - Prepare compatibility for Moodle 3.4, no functionality change.
+
 ### v3.3-r4
 
 * 2017-12-15 - Fixed a minor bug to restore the functionality of the setting linkparticipantspage.
