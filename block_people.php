@@ -201,7 +201,7 @@ class block_people extends block_base {
             $this->content->text .= html_writer::tag('h3', get_string('participants'));
 
             // Only if user is allow to see participants list.
-            if (has_capability('moodle/course:viewparticipants', $currentcontext)) {
+            if (course_can_view_participants($currentcontext)) {
                 $this->content->text .= html_writer::start_tag('a',
                     array('href'  => new moodle_url('/user/index.php', array('contextid' => $currentcontext->id)),
                           'title' => get_string('participants')));

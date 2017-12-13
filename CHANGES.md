@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2017-12-13 - Replaced a check for a capability with a new introduced function call.
 * 2017-12-12 - Prepare compatibility for Moodle 3.4, no functionality change.
 
 ### v3.3-r4
