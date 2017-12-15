@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2017-12-15 - Fixed a minor bug to restore the functionality of the setting linkparticipantspage.
+
 ### v3.3-r3
 
 * 2017-12-08 - Minor string bug fix.
