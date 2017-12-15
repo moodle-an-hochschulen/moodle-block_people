@@ -153,27 +153,14 @@ class block_people extends block_base {
                     $this->content->text .= html_writer::start_tag('div', array('class' => 'image'));
                     if (has_capability('moodle/user:viewdetails', $currentcontext)) {
                         $this->content->text .= $OUTPUT->user_picture($user,
-                                array('size' => 30, 'link' => true, 'courseid' => $COURSE->id));
+                                array('size' => 30, 'link' => true, 'courseid' => $COURSE->id, 'includefullname' => true));
                     } else {
                         $this->content->text .= $OUTPUT->user_picture($user,
-                                array('size' => 30, 'link' => false, 'courseid' => $COURSE->id));
+                                array('size' => 30, 'link' => false, 'courseid' => $COURSE->id, 'includefullname' => true));
                     }
-                    $this->content->text .= html_writer::end_tag('div');
-
-                    $this->content->text .= html_writer::start_tag('div', array('class' => 'name'));
-                        $this->content->text .= fullname($t);
                     $this->content->text .= html_writer::end_tag('div');
 
                     $this->content->text .= html_writer::start_tag('div', array('class' => 'icons'));
-                    if (has_capability('moodle/user:viewdetails', $currentcontext)) {
-                        $this->content->text .= html_writer::start_tag('a',
-                                array('href' => new moodle_url('/user/view.php', array('id' => $t->id, 'course' => $COURSE->id)),
-                                        'title' => get_string('viewprofile', 'core')));
-                        $this->content->text .= $OUTPUT->pix_icon('i/user',
-                                get_string('viewprofile', 'core'), 'moodle');
-                        $this->content->text .= html_writer::end_tag('a');
-                    }
-
                     if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $t->id != $USER->id) {
                         $this->content->text .= html_writer::start_tag('a',
                                 array('href' => new moodle_url('/message/index.php', array('id' => $t->id)),

@@ -71,12 +71,12 @@ Fixed Behaviours
 
 block_people gets the list of teacher roles from $CFG->coursecontact. With this Moodle core setting, you can define which roles are displayed in block_people's list of teachers.
 
-### 2. Quicklink for teachers
+### 2. Links
 
-block_people only shows a quicklink to the teacher's profile if the user has the capability moodle/user:viewdetails
+block_people only allows to view the teacher's profile if the user has the capability moodle/user:viewdetails
 See http://docs.moodle.org/en/Capabilities/moodle/user:viewdetails for details on this capability
 
-block_people only shows a quicklink to the message system if the user has the capability moodle/site:sendmessage and if the Moodle message system is turnes on ($CFG->messaging)
+block_people only shows a quicklink to the message system if the user has the capability moodle/site:sendmessage and if the Moodle message system is turned on ($CFG->messaging)
 See http://docs.moodle.org/en/Capabilities/moodle/site:sendmessage for details on this capability and http://docs.moodle.org/en/Messaging for details on the messaging system
 
 ### 3. Roles sort order
