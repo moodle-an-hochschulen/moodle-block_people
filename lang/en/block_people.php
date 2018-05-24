@@ -28,6 +28,7 @@ $string['pluginname'] = 'People';
 $string['participantslist'] = 'Show participants list';
 $string['people:addinstance'] = 'Add a new people block';
 $string['people:myaddinstance'] = 'Add a new people block to Dashboard';
+$string['privacy:metadata'] = 'The people plugin provides extended functionality to Moodle users, but does not store any personal data.';
 $string['noparticipantslist'] = 'Viewing the participants list is prohibited in this course';
 
 // Settings.
