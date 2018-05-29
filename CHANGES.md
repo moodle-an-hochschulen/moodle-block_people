@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2018-05-29 - Check compatibility for Moodle 3.5, no functionality change.
+
 ### v3.4-r2
 
 * 2018-05-16 - Implement Privacy API.
