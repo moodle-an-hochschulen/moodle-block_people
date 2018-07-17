@@ -43,6 +43,10 @@ There, you find three sections:
 
 This setting allows you to control which users appear in this block. Users need to have at least one of these roles in a course to be shown in the block.
 
+#### Show multiple roles
+
+This setting allows you to control if users who have more than one of the roles configured above are listed once or multiple times in this block. If this setting is disabled, users will be only listed with the first role they have according to the global role sort order. If this setting is enabled, users will be listed within each of their roles.
+
 
 ### 2. Participants page
 

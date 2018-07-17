@@ -42,6 +42,12 @@ if ($ADMIN->fulltree) {
     $default = array('editingteacher');
     $settings->add(new admin_setting_pickroles($name, $title, $description, $default));
 
+    // Setting to show multiple roles within the block.
+    $name = 'block_people/multipleroles';
+    $title = get_string('setting_multipleroles', 'block_people', null, true);
+    $description = get_string('setting_multipleroles_desc', 'block_people', null, true);
+    $settings->add(new admin_setting_configcheckbox($name, $title, $description, 0));
+
     // Settings title to group partictpants page related settings together with a common heading. We don't want a description here.
     $name = 'block_people/participantspageheading';
     $title = get_string('setting_participantspageheading', 'block_people', null, true);

@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2018-07-17 - Add the possibility to control if users are listed with multiple roles in the block + respect the global roles sort order when building the teacher list - Credits to David Knuplesch.
 * 2018-07-17 - Clean up appearance of teacher list.
 * 2018-07-17 - Add the possibility to control the roles to be shown in this block instead of using $CFG->coursecontact.
 

@@ -109,82 +109,113 @@ class block_people extends block_base {
         $roles = get_config('block_people', 'roles');
         if (!empty($roles)) {
             $teacherroles = explode(',', $roles);
-            foreach ($teacherroles as $tr) {
-                $teachers[$tr] = get_role_users($tr,
-                        $currentcontext,
-                        true,
-                        'u.id, u.lastname, u.firstname, u.firstnamephonetic, u. lastnamephonetic, u.middlename, u.alternatename,
-                                u.picture, u.imagealt, u.email',
-                        'u.lastname ASC, u.firstname ASC');
-            }
+            $teachers = get_role_users($teacherroles,
+                    $currentcontext,
+                    true,
+                    'ra.id AS raid, r.id AS roleid, r.sortorder, u.id, u.lastname, u.firstname, u.firstnamephonetic,
+                            u.lastnamephonetic, u.middlename, u.alternatename, u.picture, u.imagealt, u.email',
+                    'r.sortorder ASC, u.lastname ASC, u.firstname ASC');
         }
 
         // Get role names / aliases in course context.
         $rolenames = role_get_names($currentcontext, ROLENAME_ALIAS, true);
 
+        // Get multiple roles config.
+        $multipleroles = get_config('block_people', 'multipleroles');
+
         // Start teachers list.
         $this->content->text .= html_writer::start_tag('div', array('class' => 'teachers'));
 
-        // Check every teacherrole.
-        foreach ($teachers as $id => $tr) {
-            if (count($tr) > 0) {
-                // Write heading and open new list.
-                $this->content->text .= html_writer::tag('h3', $rolenames[$id]);
-                $this->content->text .= html_writer::start_tag('ul');
+        // Initialize running variables.
+        $teacherrole = null;
+        $displayedteachers = array();
 
-                // Do for every teacher with this role.
-                foreach ($tr as $t) {
-                    // Output teacher.
-                    $this->content->text .= html_writer::start_tag('li');
+        // Check every teacher.
+        foreach ($teachers as $teacher) {
+            // If users should only be listed once.
+            if (!$multipleroles) {
+                // Continue if we have already shown this user.
+                if (isset($displayedteachers[$teacher->id])) {
+                    continue;
+                }
+                // Remember that we have shown this user.
+                $displayedteachers[$teacher->id] = 1;
 
-                    // Create user object for picture output.
-                    $user = new stdClass();
-                    $user->id = $t->id;
-                    $user->lastname = $t->lastname;
-                    $user->firstname = $t->firstname;
-                    $user->lastnamephonetic = $t->lastnamephonetic;
-                    $user->firstnamephonetic = $t->firstnamephonetic;
-                    $user->middlename = $t->middlename;
-                    $user->alternatename = $t->alternatename;
-                    $user->picture = $t->picture;
-                    $user->imagealt = $t->imagealt;
-                    $user->email = $t->email;
+                // Otherwise.
+            } else {
+                // Continue if we have already shown this user.
+                if (isset($displayedteachers[$teacher->id][$teacher->roleid])) {
+                    continue;
+                }
+                // Remember that we have shown this user and his role.
+                $displayedteachers[$teacher->id][$teacher->roleid] = 1;
+            }
 
-                    $this->content->text .= html_writer::start_tag('div', array('class' => 'image'));
-                    if (has_capability('moodle/user:viewdetails', $currentcontext)) {
-                        $this->content->text .= $OUTPUT->user_picture($user,
-                                array('size' => 30, 'link' => true, 'courseid' => $COURSE->id, 'includefullname' => false));
-                    } else {
-                        $this->content->text .= $OUTPUT->user_picture($user,
-                                array('size' => 30, 'link' => false, 'courseid' => $COURSE->id, 'includefullname' => false));
-                    }
-                    $this->content->text .= html_writer::end_tag('div');
-
-                    $this->content->text .= html_writer::start_tag('div', array('class' => 'details'));
-
-                        $this->content->text .= html_writer::start_tag('div', array('class' => 'name'));
-                        $this->content->text .= fullname($t);
-                        $this->content->text .= html_writer::end_tag('div');
-
-                        $this->content->text .= html_writer::start_tag('div', array('class' => 'icons'));
-                        if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $t->id != $USER->id) {
-                            $this->content->text .= html_writer::start_tag('a',
-                                     array('href' => new moodle_url('/message/index.php', array('id' => $t->id)),
-                                             'title' => get_string('sendmessageto', 'core_message', fullname($t))));
-                            $this->content->text .= $OUTPUT->pix_icon('t/email',
-                                     get_string('sendmessageto', 'core_message', fullname($t)), 'moodle');
-                            $this->content->text .= html_writer::end_tag('a');
-                        }
-                        $this->content->text .= html_writer::end_tag('div');
-
-                    $this->content->text .= html_writer::end_tag('div');
-
-                    $this->content->text .= html_writer::end_tag('li');
+            // If we have to process a new role.
+            if ($teacherrole != $teacher->roleid) {
+                // End previous role list if necessary.
+                if ($teacherrole != null) {
+                    $this->content->text .= html_writer::end_tag('ul');
                 }
 
-                // End list.
-                $this->content->text .= html_writer::end_tag('ul');
+                // Write heading and open new role list.
+                $teacherrole = $teacher->roleid;
+                $this->content->text .= html_writer::tag('h3', $rolenames[$teacherrole]);
+                $this->content->text .= html_writer::start_tag('ul');
             }
+
+            // Start output teacher.
+            $this->content->text .= html_writer::start_tag('li');
+
+            // Create user object for picture output.
+            $user = new stdClass();
+            $user->id = $teacher->id;
+            $user->lastname = $teacher->lastname;
+            $user->firstname = $teacher->firstname;
+            $user->lastnamephonetic = $teacher->lastnamephonetic;
+            $user->firstnamephonetic = $teacher->firstnamephonetic;
+            $user->middlename = $teacher->middlename;
+            $user->alternatename = $teacher->alternatename;
+            $user->picture = $teacher->picture;
+            $user->imagealt = $teacher->imagealt;
+            $user->email = $teacher->email;
+
+            // Teacher image.
+            $this->content->text .= html_writer::start_tag('div', array('class' => 'image'));
+            if (has_capability('moodle/user:viewdetails', $currentcontext)) {
+                $this->content->text .= $OUTPUT->user_picture($user,
+                        array('size' => 30, 'link' => true, 'courseid' => $COURSE->id, 'includefullname' => false));
+            } else {
+                $this->content->text .= $OUTPUT->user_picture($user,
+                        array('size' => 30, 'link' => false, 'courseid' => $COURSE->id, 'includefullname' => false));
+            }
+            $this->content->text .= html_writer::end_tag('div');
+
+            // Teacher details.
+            $this->content->text .= html_writer::start_tag('div', array('class' => 'details'));
+            $this->content->text .= html_writer::start_tag('div', array('class' => 'name'));
+            $this->content->text .= fullname($teacher);
+            $this->content->text .= html_writer::end_tag('div');
+            $this->content->text .= html_writer::start_tag('div', array('class' => 'icons'));
+            if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $teacher->id != $USER->id) {
+                $this->content->text .= html_writer::start_tag('a',
+                        array('href'  => new moodle_url('/message/index.php', array('id' => $teacher->id)),
+                              'title' => get_string('sendmessageto', 'core_message', fullname($teacher))));
+                $this->content->text .= $OUTPUT->pix_icon('t/email',
+                        get_string('sendmessageto', 'core_message', fullname($teacher)), 'moodle');
+                $this->content->text .= html_writer::end_tag('a');
+            }
+            $this->content->text .= html_writer::end_tag('div');
+            $this->content->text .= html_writer::end_tag('div');
+
+            // End output teacher.
+            $this->content->text .= html_writer::end_tag('li');
+
+        }
+
+        // End role list if necessary.
+        if ($teacherrole != null) {
+            $this->content->text .= html_writer::end_tag('ul');
         }
 
         // End teachers list.
