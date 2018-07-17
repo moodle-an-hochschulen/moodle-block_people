@@ -2,16 +2,30 @@
 .block_people .teachers li {
     list-style: none;
     margin-left: 0;
+    padding-left: 0;
 }
 
 .block_people .teachers li {
-    clear: both;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    display: table;
+    width: 100%;
+}
+
+.block_people .teachers .details {
+    display: table-cell;
+    line-height: 1;
+    vertical-align: top;
+}
+
+.block_people .teachers .image {
+    width: 45px;
+    display: table-cell;
+    vertical-align: top;
 }
 
 .block_people .teachers .icons {
-    display: block;
     min-height: 22px;
+    padding-top: 3px;
 }
 
 .block_people .teachers .icons img,
@@ -21,14 +35,11 @@
 
 .block_people .content .teachers h3,
 .block_people .content .participants h3 {
-    clear: both;
     padding-left: 0;
 }
 
 .block_people .content .teachers .userpicture {
-    float: left;
     height: inherit;
-    margin-right: 10px;
     width: inherit;
 }
 

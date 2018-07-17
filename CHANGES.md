@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2018-07-17 - Clean up appearance of teacher list.
 * 2018-07-17 - Add the possibility to control the roles to be shown in this block instead of using $CFG->coursecontact.
 
 ### v3.5-r1
