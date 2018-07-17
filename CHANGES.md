@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v3.5-r2
 
 * 2018-07-17 - Add the possibility to control if users are listed with multiple roles in the block + respect the global roles sort order when building the teacher list - Credits to David Knuplesch.
 * 2018-07-17 - Clean up appearance of teacher list.
