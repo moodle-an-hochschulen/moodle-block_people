@@ -11,6 +11,7 @@
 
 .block_people .teachers .icons {
     display: block;
+    min-height: 22px;
 }
 
 .block_people .teachers .icons img,
