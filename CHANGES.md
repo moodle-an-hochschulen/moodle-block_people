@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2018-07-17 - Add the possibility to control the roles to be shown in this block instead of using $CFG->coursecontact.
+
 ### v3.5-r1
 
 * 2018-05-29 - Check compatibility for Moodle 3.5, no functionality change.

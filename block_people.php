@@ -106,9 +106,9 @@ class block_people extends block_base {
         $currentcontext = $this->page->context;
 
         // Get teachers separated by roles.
-        $CFG->coursecontact = trim($CFG->coursecontact);
-        if (!empty($CFG->coursecontact)) {
-            $teacherroles = explode(',', $CFG->coursecontact);
+        $roles = get_config('block_people', 'roles');
+        if (!empty($roles)) {
+            $teacherroles = explode(',', $roles);
             foreach ($teacherroles as $tr) {
                 $teachers[$tr] = get_role_users($tr,
                         $currentcontext,
