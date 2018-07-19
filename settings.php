@@ -27,13 +27,19 @@ defined('MOODLE_INTERNAL') || die();
 if ($ADMIN->fulltree) {
     global $CFG;
     // Locallib for updatedcallback function.
-    require_once($CFG->dirroot.'/blocks/people/locallib.php');
+    require_once(__DIR__ . '/locallib.php');
 
     // Settings title to group role related settings together with a common heading. We don't want a description here.
     $name = 'block_people/rolesheading';
     $title = get_string('setting_rolesheading', 'block_people', null, true);
-    $setting = new admin_setting_heading($name, $title, null);
-    $settings->add($setting);
+    $settings->add(new admin_setting_heading($name, $title, null));
+
+    // Override global course contact setting (Site Administration -> Appearance -> Courses -> coursecontact).
+    $name = 'block_people/overridecoursecontact';
+    $title = get_string('setting_overridecoursecontact', 'block_people', null, true);
+    $description = get_string('setting_overridecoursecontact_help', 'block_people', null, true);
+    $default = false;
+    $settings->add(new admin_setting_configcheckbox($name, $title, $description, $default));
 
     // Setting to configure the roles to be shown within the block.
     $name = 'block_people/roles';
@@ -41,6 +47,22 @@ if ($ADMIN->fulltree) {
     $description = get_string('setting_roles_desc', 'block_people', null, true);
     $default = array('editingteacher');
     $settings->add(new admin_setting_pickroles($name, $title, $description, $default));
+
+    // Allow instance override of default selected roles.
+    $name = 'block_people/allowinstanceoverride';
+    $title = get_string('setting_allowinstanceoverride', 'block_people', null, true);
+    $description = get_string('setting_allowinstanceoverride_help', 'block_people', null, true);
+    $default = false;
+    $settings->add(new admin_setting_configcheckbox($name, $title, $description, $default));
+
+    // Overridable roles.
+    $name = 'block_people/overridableroles';
+    $title = get_string('setting_overridableroles', 'block_people', null, true);
+    $description = get_string('setting_overridableroles_help', 'block_people', null, true);
+    $default = array();
+    $setting = new admin_setting_pickroles($name, $title, $description, $default);
+    $setting->set_updatedcallback('block_people_reset_instance_overridable_roles');
+    $settings->add($setting);
 
     // Setting to show multiple roles within the block.
     $name = 'block_people/multipleroles';
@@ -51,8 +73,7 @@ if ($ADMIN->fulltree) {
     // Settings title to group partictpants page related settings together with a common heading. We don't want a description here.
     $name = 'block_people/participantspageheading';
     $title = get_string('setting_participantspageheading', 'block_people', null, true);
-    $setting = new admin_setting_heading($name, $title, null);
-    $settings->add($setting);
+    $settings->add(new admin_setting_heading($name, $title, null));
 
     // Setting to show link to the participants page within the block.
     $name = 'block_people/linkparticipantspage';
@@ -63,8 +84,7 @@ if ($ADMIN->fulltree) {
     // Settings title to group hiding the block related settings together with a common heading. We don't want a description here.
     $name = 'block_people/hideblockheading';
     $title = get_string('setting_hideblockheading', 'block_people', null, true);
-    $setting = new admin_setting_heading($name, $title, null);
-    $settings->add($setting);
+    $settings->add(new admin_setting_heading($name, $title, null));
 
     // Setting to disable the possibility to hide the block.
     $name = 'block_people/hideblock';

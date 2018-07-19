@@ -4,9 +4,11 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v3.5-r3
 
 * 2018-07-17 - Remove unneeded string from language pack.
+* 2018-07-19 - Add the possibility to choose if use the default $CFG->coursecontact or override it, in order to select specific roles to be displayed
+* 2018-07-19 - Add the possibility to let instance level selection of roles to be displayed
 
 ### v3.5-r2
 

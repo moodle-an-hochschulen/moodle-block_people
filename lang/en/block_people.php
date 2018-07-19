@@ -47,8 +47,20 @@ $string['setting_resetvisibility_desc'] = 'By enabling this checkbox, the visibi
 Please note: <br/>
 After saving this option, the database operations for resetting the visibility will be triggered and this checkbox will be unticked again. The next enabling and saving of this feature will trigger the database operations for resetting the visibility again. ';
 $string['setting_rolesheading'] = 'Roles';
+$string['setting_overridecoursecontact'] = 'Override course contacts';
+$string['setting_overridecoursecontact_help'] = 'Override global core setting coursecontact with a different roles list.';
 $string['setting_roles'] = 'Show these roles';
 $string['setting_roles_desc'] = 'This setting allows you to control which users appear in this block. Users need to have at least one of these roles in a course to be shown in the block.';
+$string['setting_allowinstanceoverride'] = 'Allow instance override';
+$string['setting_allowinstanceoverride_help'] = 'Allow override of default settings in block instances';
+$string['setting_overridableroles'] = 'Available roles for instance override';
+$string['setting_overridableroles_help'] = 'List of available roles in block instance\'s settings when local override is allowed.';
+
+$string['setting_overridedefaultroles'] = 'Override default roles';
+$string['setting_overridedefaultroles_help'] = 'List of available roles in block instance\'s settings when local override is allowed.';
+$string['setting_instanceroles'] = 'Roles to display';
+$string['setting_instanceroles_help'] = 'List of available roles in block instance\'s settings when local override is allowed and selected.';
+$string['setting_overridenotallowed'] = 'Instance override of default settings is not allowed';
 
 // Notifications.
 $string['resetvisibilitysuccess'] = 'Success! All "block_people" instances are visible (again). <br/> The setting "Reset visibility" has been reset.';

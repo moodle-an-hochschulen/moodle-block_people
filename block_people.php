@@ -35,6 +35,7 @@ class block_people extends block_base {
     /**
      * init function
      * @return void
+     * @throws coding_exception
      */
     public function init() {
         $this->title = get_string('pluginname', 'block_people').'&nbsp;';
@@ -59,6 +60,14 @@ class block_people extends block_base {
     }
 
     /**
+     * instance_allow_config function
+     * @return boolean
+     */
+    public function instance_allow_config() {
+        return true;
+    }
+
+    /**
      * instance_allow_multiple function
      * @return bool
      */
@@ -69,6 +78,7 @@ class block_people extends block_base {
     /**
      * instance_can_be_hidden function
      * @return bool
+     * @throws dml_exception
      */
     public function instance_can_be_hidden() {
         // By default, instances can be hidden by the user.
@@ -84,6 +94,9 @@ class block_people extends block_base {
     /**
      * get_content function
      * @return string
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
      */
     public function get_content() {
         global $COURSE, $CFG, $OUTPUT, $USER;
@@ -105,11 +118,15 @@ class block_people extends block_base {
         // Get context.
         $currentcontext = $this->page->context;
 
+        require_once(__DIR__ . '/locallib.php');
+
+        // Get roles from instance settings or default settings.
+        $rolesvisualization = block_people_get_roles_visualization($this);
+        $roles = block_people_get_roles_to_be_shown($this, $rolesvisualization);
         // Get teachers separated by roles.
-        $roles = get_config('block_people', 'roles');
+        $teachers = array();
         if (!empty($roles)) {
-            $teacherroles = explode(',', $roles);
-            $teachers = get_role_users($teacherroles,
+            $teachers = get_role_users($roles,
                     $currentcontext,
                     true,
                     'ra.id AS raid, r.id AS roleid, r.sortorder, u.id, u.lastname, u.firstname, u.firstnamephonetic,
