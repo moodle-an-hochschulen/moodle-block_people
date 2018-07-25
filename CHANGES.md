@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2018-07-25 - Changed CSS font-weight rule due to displaying issues.
 * 2018-07-17 - Remove unneeded string from language pack.
 
 ### v3.5-r2
