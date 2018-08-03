@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v3.5-r3
 
 * 2018-07-25 - Changed CSS font-weight rule due to displaying issues.
 * 2018-07-17 - Remove unneeded string from language pack.
