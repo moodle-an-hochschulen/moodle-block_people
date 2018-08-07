@@ -34,26 +34,12 @@ if ($ADMIN->fulltree) {
     $title = get_string('setting_rolesheading', 'block_people', null, true);
     $settings->add(new admin_setting_heading($name, $title, null));
 
-    // Override global course contact setting (Site Administration -> Appearance -> Courses -> coursecontact).
-    $name = 'block_people/overridecoursecontact';
-    $title = get_string('setting_overridecoursecontact', 'block_people', null, true);
-    $description = get_string('setting_overridecoursecontact_help', 'block_people', null, true);
-    $default = false;
-    $settings->add(new admin_setting_configcheckbox($name, $title, $description, $default));
-
     // Setting to configure the roles to be shown within the block.
     $name = 'block_people/roles';
     $title = get_string('setting_roles', 'block_people', null, true);
     $description = get_string('setting_roles_desc', 'block_people', null, true);
     $default = array('editingteacher');
     $settings->add(new admin_setting_pickroles($name, $title, $description, $default));
-
-    // Allow instance override of default selected roles.
-    $name = 'block_people/allowinstanceoverride';
-    $title = get_string('setting_allowinstanceoverride', 'block_people', null, true);
-    $description = get_string('setting_allowinstanceoverride_help', 'block_people', null, true);
-    $default = false;
-    $settings->add(new admin_setting_configcheckbox($name, $title, $description, $default));
 
     // Overridable roles.
     $name = 'block_people/overridableroles';

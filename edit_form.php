@@ -45,7 +45,6 @@ class block_people_edit_form extends block_edit_form {
             $select = $mform->addElement('select', 'config_instanceroles',
                 get_string('setting_instanceroles', 'block_people'), $availableroles);
             $select->setMultiple(true);
-            $mform->setDefault('config_instanceroles', explode(',', get_config('block_people', 'roles')));
             $mform->addHelpButton('config_instanceroles', 'setting_instanceroles', 'block_people');
             $mform->disabledIf('config_instanceroles', 'config_overridedefaultroles');
         } else {
@@ -53,4 +52,18 @@ class block_people_edit_form extends block_edit_form {
         }
     }
 
+    /**
+     * Since empty select are not submitted, check if not isset and create an empty array.
+     *
+     * @return object
+     */
+    public function get_data() {
+        if ($data = parent::get_data()) {
+            // Check if not isset and create an empty array.
+            if (!isset($data->config_instanceroles)) {
+                $data->config_instanceroles = [];
+            }
+        }
+        return $data;
+    }
 }

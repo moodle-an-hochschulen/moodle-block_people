@@ -25,14 +25,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 define('BLOCK_PEOPLE_SHOW_NOTHING', 0);
-define('BLOCK_PEOPLE_SHOW_COURSE_CONTACT', 1);
-define('BLOCK_PEOPLE_SHOW_DEFAULT_ROLES', 2);
-define('BLOCK_PEOPLE_SHOW_INSTANCE_ROLES', 3);
+define('BLOCK_PEOPLE_SHOW_DEFAULT_ROLES', 1);
+define('BLOCK_PEOPLE_SHOW_INSTANCE_ROLES', 2);
 
 /**
  * If setting is saved, use this callback to update the visibility for all block instances.
- * @throws coding_exception
- * @throws dml_exception
  */
 function block_people_reset_visibility() {
     global $DB;
@@ -56,11 +53,10 @@ function block_people_reset_visibility() {
 /**
  * Get the list of assignable roles in course context
  *
- * @param null $context
+ * @param context $context
  * @return array
- * @throws dml_exception
  */
-function block_people_get_course_assignable_roles($context = null) {
+function block_people_get_course_assignable_roles(context $context) {
     global $DB;
     // Get roles assignables in course context.
     $courseroles = get_roles_for_contextlevels(CONTEXT_COURSE);
@@ -74,11 +70,10 @@ function block_people_get_course_assignable_roles($context = null) {
 /**
  * Get the list of available roles for instance override
  *
- * @param null $context
+ * @param context $context
  * @return array
- * @throws dml_exception
  */
-function block_people_get_instance_overridable_roles($context = null) {
+function block_people_get_instance_overridable_roles(context $context) {
     // Get the available roles from global config.
     $availableroles = array_flip(explode(',', get_config('block_people', 'overridableroles')));
     // Get the assignable roles.
@@ -91,54 +86,45 @@ function block_people_get_instance_overridable_roles($context = null) {
 
 /**
  * If setting is saved, use this callback to remove from instances' configdata any role no more overridable.
- * @throws dml_exception
  */
 function block_people_reset_instance_overridable_roles() {
     global $DB;
 
-    if (get_config('block_people', 'overridableroles') != null) {
-        $overridableroles = explode(",", get_config('block_people', 'overridableroles'));
-        $blockistances = $DB->get_records('block_instances', array('blockname' => 'people'));
-        foreach ($blockistances as $blockinstance) {
-            // Block configdata is saved serialized and encoded in base64, so we need to decode and unserialize.
-            $blockconfig = unserialize(base64_decode($blockinstance->configdata));
-            // Update configdata filtering roles no more overridable.
-            $blockconfig->instanceroles = array_filter($blockconfig->instanceroles, function($role) use ($overridableroles) {
+    $overridableroles = explode(",", get_config('block_people', 'overridableroles'));
+
+    $blockistances = $DB->get_records('block_instances', array('blockname' => 'people'));
+    foreach ($blockistances as $blockinstance) {
+        // Block configdata is saved serialized and encoded in base64, so we need to decode and unserialize.
+        $blockconfig = unserialize(base64_decode($blockinstance->configdata));
+        // If no overridable role is available then reset block config.
+        if ($overridableroles == null || count($overridableroles) == 0) {
+            $blockconfig->overridedefaultroles = 0;
+            $blockconfig->instanceroles = array();
+        } else { // Update configdata filtering roles no more overridable.
+            $blockconfig->instanceroles = array_filter($blockconfig->instanceroles, function ($role) use ($overridableroles) {
                 if (in_array($role, $overridableroles)) {
                     return true;
                 }
                 return false;
             });
-            // Update configdata.
-            $DB->set_field('block_instances', 'configdata', base64_encode(serialize($blockconfig)),
-                array('id' => $blockinstance->id));
         }
+        // Update configdata.
+        $DB->set_field('block_instances', 'configdata', base64_encode(serialize($blockconfig)),
+            array('id' => $blockinstance->id));
     }
 }
 
 /**
  * Check if current user can override roles
  *
- * @param $context
+ * @param context $context
  * @return bool
- * @throws coding_exception
- * @throws dml_exception
  */
-function block_people_can_override_roles($context) {
-    // Override core setting is disables, so noone can override roles.
-    if (!get_config('block_people', 'overridecoursecontact')) {
-        return false;
-    }
-    // Override core setting is enabled but instance override is not allowed, so noone can override roles.
-    if (get_config('block_people', 'overridecoursecontact') &&
-        !get_config('block_people', 'allowinstanceoverride')) {
-        return false;
-    }
-    // Override core setting is enabled and instance override is allowed,
-    // so only users with overrideglobalsettings capability can override global settings.
-    if (get_config('block_people', 'overridecoursecontact') &&
-        get_config('block_people', 'allowinstanceoverride') &&
-        has_capability('block/people:overrideglobalsettings', $context)) {
+function block_people_can_override_roles(context $context) {
+
+    // Only users with overrideglobalsettings capability can override global settings and only when there are overridable roles.
+    if (has_capability('block/people:overrideglobalsettings', $context) &&
+        block_people_is_instance_override_available($context)) {
         return true;
     }
     // Default return.
@@ -146,31 +132,36 @@ function block_people_can_override_roles($context) {
 }
 
 /**
+ * Instance override is available when almost one roles is overridable.
+ *
+ * @param $context
+ * @return bool
+ */
+function block_people_is_instance_override_available(context $context) {
+    return (count(block_people_get_instance_overridable_roles($context)) > 0);
+}
+
+/**
  * According to settings, get the type of visualization to use
  *
  * @param block_people $instance Current block instance
+ * @param context $context
  * @return int Type of visualization
- * @throws dml_exception
  */
-function block_people_get_roles_visualization(block_people $instance) {
+function block_people_get_roles_visualization(block_people $instance, context $context) {
     // Get settings.
-    $overridecoursecontact = get_config('block_people', 'overridecoursecontact');
-    $allowinstanceoverride = get_config('block_people', 'allowinstanceoverride');
+    $instanceoverrideavailable = block_people_is_instance_override_available($context);
     $instanceoverride = isset($instance->config->overridedefaultroles) ? $instance->config->overridedefaultroles : false;
-    // If overridecoursecontact is false then we use course contact as roles.
-    if (!$overridecoursecontact) {
-        return BLOCK_PEOPLE_SHOW_COURSE_CONTACT;
-    }
     // If overridecoursecontact and instance override is not allowed, we use default.
-    if ($overridecoursecontact && !$allowinstanceoverride) {
+    if (!$instanceoverrideavailable) {
         return BLOCK_PEOPLE_SHOW_DEFAULT_ROLES;
     }
     // If overridecoursecontact and instance override is not allowed, we use default.
-    if ($overridecoursecontact && $allowinstanceoverride && !$instanceoverride) {
+    if ($instanceoverrideavailable && !$instanceoverride) {
         return BLOCK_PEOPLE_SHOW_DEFAULT_ROLES;
     }
     // If all is active, we use instance roles.
-    if ($overridecoursecontact && $allowinstanceoverride && $instanceoverride) {
+    if ($instanceoverrideavailable && $instanceoverride) {
         return BLOCK_PEOPLE_SHOW_INSTANCE_ROLES;
     }
     // If code reach this line, something is wrong and then nothing is shown.
@@ -183,17 +174,11 @@ function block_people_get_roles_visualization(block_people $instance) {
  * @param block_people $instance
  * @param $visualization
  * @return array
- * @throws dml_exception
  */
 function block_people_get_roles_to_be_shown(block_people $instance, $visualization) {
-    global $CFG;
     $roles = array();
 
     switch ($visualization) {
-        case BLOCK_PEOPLE_SHOW_COURSE_CONTACT: {
-            $roles = explode(',', $CFG->coursecontact);
-            break;
-        }
         case BLOCK_PEOPLE_SHOW_DEFAULT_ROLES: {
             $roles = explode(',', get_config('block_people', 'roles'));
             break;
@@ -211,4 +196,3 @@ function block_people_get_roles_to_be_shown(block_people $instance, $visualizati
 
     return $roles;
 }
-

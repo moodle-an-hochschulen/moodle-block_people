@@ -35,7 +35,6 @@ class block_people extends block_base {
     /**
      * init function
      * @return void
-     * @throws coding_exception
      */
     public function init() {
         $this->title = get_string('pluginname', 'block_people').'&nbsp;';
@@ -78,7 +77,6 @@ class block_people extends block_base {
     /**
      * instance_can_be_hidden function
      * @return bool
-     * @throws dml_exception
      */
     public function instance_can_be_hidden() {
         // By default, instances can be hidden by the user.
@@ -94,9 +92,6 @@ class block_people extends block_base {
     /**
      * get_content function
      * @return string
-     * @throws coding_exception
-     * @throws dml_exception
-     * @throws moodle_exception
      */
     public function get_content() {
         global $COURSE, $CFG, $OUTPUT, $USER;
@@ -121,7 +116,7 @@ class block_people extends block_base {
         require_once(__DIR__ . '/locallib.php');
 
         // Get roles from instance settings or default settings.
-        $rolesvisualization = block_people_get_roles_visualization($this);
+        $rolesvisualization = block_people_get_roles_visualization($this, $currentcontext);
         $roles = block_people_get_roles_to_be_shown($this, $rolesvisualization);
         // Get teachers separated by roles.
         $teachers = array();
