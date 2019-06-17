@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2019-06-17 - Prepare compatibility for Moodle 3.7.
+
 ### v3.6-r1
 
 * 2019-01-16 - Check compatibility for Moodle 3.6, no functionality change.
