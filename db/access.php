@@ -40,12 +40,11 @@ $capabilities = array(
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
     'block/people:overrideglobalsettings' => array(
-        'riskbitmask' => RISK_SPAM,
+        'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
         'archetypes' => array(
-            'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
-        )
+        ),
     ),
 );
