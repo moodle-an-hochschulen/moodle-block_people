@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2020-02-12 - Remove hacky workaround for duplicate block title now that block_partipants has been removed from core.
 * 2020-02-12 - Prepare compatibility for Moodle 3.8.
 
 ### v3.7-r1

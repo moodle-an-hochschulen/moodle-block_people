@@ -37,9 +37,7 @@ class block_people extends block_base {
      * @return void
      */
     public function init() {
-        $this->title = get_string('pluginname', 'block_people').'&nbsp;';
-                // Non-breaking space is added because otherwise the Moodle CLI installer fails due to a
-                // duplicate block title with block_partipants. The space should not have a big visual impact.
+        $this->title = get_string('pluginname', 'block_people');
     }
 
     /**
