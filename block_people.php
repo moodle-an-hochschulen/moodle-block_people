@@ -113,6 +113,8 @@ class block_people extends block_base {
                     'ra.id AS raid, r.id AS roleid, r.sortorder, u.id, u.lastname, u.firstname, u.firstnamephonetic,
                             u.lastnamephonetic, u.middlename, u.alternatename, u.picture, u.imagealt, u.email',
                     'r.sortorder ASC, u.lastname ASC, u.firstname ASC');
+        } else {
+            $teachers = array();
         }
 
         // Get role names / aliases in course context.
