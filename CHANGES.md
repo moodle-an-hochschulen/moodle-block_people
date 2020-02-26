@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2020-02-26 - Merged styles.css files into one file.
 * 2020-02-24 - Fixed notice if no roles are selected in the roles setting.
 * 2020-02-21 - Added newly added function get_config_for_external().
 * 2020-02-12 - Remove hacky workaround for duplicate block title now that block_partipants has been removed from core.
