@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v3.8-r1
 
 * 2020-02-26 - Added Behat tests.
 * 2020-02-26 - Merged styles.css files into one file.
