@@ -4,6 +4,15 @@ moodle-block_people
 Changes
 -------
 
+### v3.8-r1
+
+* 2020-02-26 - Added Behat tests.
+* 2020-02-26 - Merged styles.css files into one file.
+* 2020-02-24 - Fixed notice if no roles are selected in the roles setting.
+* 2020-02-21 - Added newly added function get_config_for_external().
+* 2020-02-12 - Remove hacky workaround for duplicate block title now that block_partipants has been removed from core.
+* 2020-02-12 - Prepare compatibility for Moodle 3.8.
+
 ### v3.7-r1
 
 * 2019-06-17 - Prepare compatibility for Moodle 3.7.

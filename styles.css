@@ -35,7 +35,8 @@
 
 .block_people .content .teachers h3,
 .block_people .content .participants h3 {
-    padding-left: 0;
+    font-size: 1.143rem;
+    font-weight: bold;
 }
 
 .block_people .content .teachers .userpicture {

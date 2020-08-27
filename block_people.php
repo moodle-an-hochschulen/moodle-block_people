@@ -37,9 +37,7 @@ class block_people extends block_base {
      * @return void
      */
     public function init() {
-        $this->title = get_string('pluginname', 'block_people').'&nbsp;';
-                // Non-breaking space is added because otherwise the Moodle CLI installer fails due to a
-                // duplicate block title with block_partipants. The space should not have a big visual impact.
+        $this->title = get_string('pluginname', 'block_people');
     }
 
     /**
@@ -127,6 +125,8 @@ class block_people extends block_base {
                     'ra.id AS raid, r.id AS roleid, r.sortorder, u.id, u.lastname, u.firstname, u.firstnamephonetic,
                             u.lastnamephonetic, u.middlename, u.alternatename, u.picture, u.imagealt, u.email',
                     'r.sortorder ASC, u.lastname ASC, u.firstname ASC');
+        } else {
+            $teachers = array();
         }
 
         // Get role names / aliases in course context.
@@ -257,5 +257,23 @@ class block_people extends block_base {
         }
 
         return $this->content;
+    }
+
+    /**
+     * Return the plugin config settings for external functions.
+     *
+     * @return stdClass the configs for both the block instance and plugin
+     * @since Moodle 3.8
+     */
+    public function get_config_for_external() {
+
+        // Return all settings for all users since it is safe (no private keys, etc..).
+        $instanceconfigs = !empty($this->config) ? $this->config : new stdClass();
+        $pluginconfigs = get_config('block_people');
+
+        return (object) [
+                'instance' => $instanceconfigs,
+                'plugin' => $pluginconfigs,
+        ];
     }
 }

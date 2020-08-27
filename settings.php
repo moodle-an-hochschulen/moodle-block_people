@@ -27,12 +27,13 @@ defined('MOODLE_INTERNAL') || die();
 if ($ADMIN->fulltree) {
     global $CFG;
     // Locallib for updatedcallback function.
-    require_once(__DIR__ . '/locallib.php');
+    require_once($CFG->dirroot.'/blocks/people/locallib.php');
 
     // Settings title to group role related settings together with a common heading. We don't want a description here.
     $name = 'block_people/rolesheading';
     $title = get_string('setting_rolesheading', 'block_people', null, true);
-    $settings->add(new admin_setting_heading($name, $title, null));
+    $setting = new admin_setting_heading($name, $title, null);
+    $settings->add($setting);
 
     // Setting to configure the roles to be shown within the block.
     $name = 'block_people/roles';
@@ -59,7 +60,8 @@ if ($ADMIN->fulltree) {
     // Settings title to group partictpants page related settings together with a common heading. We don't want a description here.
     $name = 'block_people/participantspageheading';
     $title = get_string('setting_participantspageheading', 'block_people', null, true);
-    $settings->add(new admin_setting_heading($name, $title, null));
+    $setting = new admin_setting_heading($name, $title, null);
+    $settings->add($setting);
 
     // Setting to show link to the participants page within the block.
     $name = 'block_people/linkparticipantspage';
@@ -70,7 +72,8 @@ if ($ADMIN->fulltree) {
     // Settings title to group hiding the block related settings together with a common heading. We don't want a description here.
     $name = 'block_people/hideblockheading';
     $title = get_string('setting_hideblockheading', 'block_people', null, true);
-    $settings->add(new admin_setting_heading($name, $title, null));
+    $setting = new admin_setting_heading($name, $title, null);
+    $settings->add($setting);
 
     // Setting to disable the possibility to hide the block.
     $name = 'block_people/hideblock';
