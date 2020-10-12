@@ -68,6 +68,23 @@ function block_people_get_course_assignable_roles(context $context) {
 }
 
 /**
+ * Get the list of assignable roles in course context
+ *
+ * @param context $context
+ * @return array
+ */
+function block_people_get_category_assignable_roles(context $context) {
+    global $DB;
+    // Get roles assignables in course context.
+    $categoryroles = get_roles_for_contextlevels(CONTEXT_COURSECAT);
+    $categoryroles = $DB->get_records_list('role', 'id', $categoryroles, 'sortorder ASC');
+    // Get localized role names.
+    $assignableroles = role_fix_names($categoryroles, $context, ROLENAME_ALIAS, true);
+
+    return $assignableroles;
+}
+
+/**
  * Get the list of available roles for instance override
  *
  * @param context $context
@@ -77,7 +94,10 @@ function block_people_get_instance_overridable_roles(context $context) {
     // Get the available roles from global config.
     $availableroles = array_flip(explode(',', get_config('block_people', 'overridableroles')));
     // Get the assignable roles.
-    $roles = block_people_get_course_assignable_roles($context);
+    $courseroles = block_people_get_course_assignable_roles($context);
+    $categoryroles = block_people_get_category_assignable_roles($context);
+
+    $roles = array_replace($courseroles, $categoryroles);
 
     $availableroles = array_intersect_key($roles, $availableroles);
 
