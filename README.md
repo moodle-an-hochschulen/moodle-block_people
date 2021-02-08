@@ -1,7 +1,7 @@
 moodle-block_people
 ===================
 
-[![Build Status](https://travis-ci.com/moodleuulm/moodle-block_people.svg?branch=master)](https://travis-ci.com/moodleuulm/moodle-block_people)
+[![Moodle Plugin CI](https://github.com/moodleuulm/moodle-block_people/workflows/Moodle%20Plugin%20CI/badge.svg?branch=MOODLE_39_STABLE)](https://github.com/moodleuulm/moodle-block_people/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3AMOODLE_39_STABLE)
 
 Moodle block which displays all teachers of a course with contact quicklinks, as well as a quicklink to the participants list
 
