@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v3.9-r3
 
 * 2021-02-05 - Make codechecker fully happy
 * 2021-02-05 - Move Moodle Plugin CI from Travis CI to Github actions
