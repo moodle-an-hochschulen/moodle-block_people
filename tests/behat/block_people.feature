@@ -126,3 +126,31 @@ Feature: Using the block_people plugin
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     Then "People" "block" should exist
+
+  @javascript
+  Scenario: The message icon is shown for users who can be messaged by the user
+    Given the following config values are set as admin:
+      | config | value | plugin       |
+      | roles  | 3, 4  | block_people |
+    And the following "users" exist:
+      | username | firstname | lastname |
+      | student1 | Student   | User     |
+    And the following "course enrolments" exist:
+      | user     | course | role    |
+      | student1 | C1     | student |
+    And I log in as "noneditor1"
+    And I open messaging
+    And I open messaging settings preferences
+    And I click on "//label[text()[contains(.,'My contacts and anyone in my courses')]]" "xpath_element"
+    And I log out
+    And I log in as "teacher1"
+    And I open messaging
+    And I open messaging settings preferences
+    And I click on "//label[text()[contains(.,'My contacts only')]]" "xpath_element"
+    And I am on "Course 1" course homepage with editing mode on
+    And I add the "People" block
+    And I log out
+    And I log in as "student1"
+    And I am on "Course 1" course homepage
+    Then "a[title='Send message to Non-editing teacher 1']" "css_element" should exist
+    And "a[title='Send message to Teacher 1']" "css_element" should not exist
