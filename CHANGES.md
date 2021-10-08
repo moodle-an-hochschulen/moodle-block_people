@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2021-10-08 - Call admin_setting_heading() with the correct type of parameters
 * 2021-10-08 - Fix a faulty behat test
 
 ### v3.10-r2
