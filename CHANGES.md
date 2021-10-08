@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2021-10-08 - Fix a faulty behat test
+
 ### v3.9-r3
 
 * 2021-02-05 - Make codechecker fully happy
