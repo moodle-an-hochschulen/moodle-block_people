@@ -115,6 +115,7 @@ Feature: Using the block_people plugin
     And I add the "People" block
     And I open the action menu in "People" "block"
     And I click on "Hide People block" "link"
+    And I turn editing mode off
     Then "People" "block" should not exist
     And I log out
     When I log in as "admin"
