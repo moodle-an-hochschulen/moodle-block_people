@@ -197,7 +197,8 @@ class block_people extends block_base {
             $this->content->text .= fullname($teacher);
             $this->content->text .= html_writer::end_tag('div');
             $this->content->text .= html_writer::start_tag('div', array('class' => 'icons'));
-            if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $teacher->id != $USER->id) {
+            if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $teacher->id != $USER->id &&
+                    \core_message\api::can_send_message($teacher->id, $USER->id)) {
                 $this->content->text .= html_writer::start_tag('a',
                         array('href'  => new moodle_url('/message/index.php', array('id' => $teacher->id)),
                               'title' => get_string('sendmessageto', 'core_message', fullname($teacher))));
