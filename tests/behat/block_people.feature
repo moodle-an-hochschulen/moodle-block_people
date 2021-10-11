@@ -154,3 +154,25 @@ Feature: Using the block_people plugin
     And I am on "Course 1" course homepage
     Then "a[title='Send message to Non-editing teacher 1']" "css_element" should exist
     And "a[title='Send message to Teacher 1']" "css_element" should not exist
+
+  Scenario: Do not show suspended users in the block
+    Given the following config values are set as admin:
+      | config | value | plugin       |
+      | roles  | 3, 4  | block_people |
+    And the following "users" exist:
+      | username | firstname | lastname |
+      | teacher2 | Teacher   | 2        |
+    And the following "course enrolments" exist:
+      | user     | course | role           | status |
+      | teacher2 | C1     | editingteacher | 1      |
+    And I log in as "admin"
+    And I navigate to "Users > Accounts > Browse list of users" in site administration
+    And I click on "Edit" "link" in the "Teacher 2" "table_row"
+    And I set the field "Suspended account" to "1"
+    And I press "Update profile"
+    And I log out
+    When I log in as "teacher1"
+    And I am on "Course 1" course homepage with editing mode on
+    And I add the "People" block
+    Then the user "Teacher 1" should be listed in the section with the role "Teacher"
+    And the user "Teacher 2" should not be listed in the section with the role "Teacher"

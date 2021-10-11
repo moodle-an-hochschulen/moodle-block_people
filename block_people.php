@@ -111,7 +111,7 @@ class block_people extends block_base {
                     $currentcontext,
                     true,
                     'ra.id AS raid, r.id AS roleid, r.sortorder, u.id, u.lastname, u.firstname, u.firstnamephonetic,
-                            u.lastnamephonetic, u.middlename, u.alternatename, u.picture, u.imagealt, u.email',
+                            u.lastnamephonetic, u.middlename, u.alternatename, u.picture, u.imagealt, u.email, u.suspended',
                     'r.sortorder ASC, u.lastname ASC, u.firstname ASC');
         } else {
             $teachers = array();
@@ -132,6 +132,11 @@ class block_people extends block_base {
 
         // Check every teacher.
         foreach ($teachers as $teacher) {
+            // If the user is suspended, skip him.
+            if ($teacher->suspended == true) {
+                continue;
+            }
+
             // If users should only be listed once.
             if (!$multipleroles) {
                 // Continue if we have already shown this user.

@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2021-10-10 - Bugfix: Do not show suspended users in the block
 * 2021-10-08 - Bugfix: Show message icon only if the user is permitted to send a private message to the other user
 * 2021-10-08 - Call admin_setting_heading() with the correct type of parameters
 * 2021-10-08 - Fix a faulty behat test
