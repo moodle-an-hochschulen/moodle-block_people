@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v3.10-r3
 
 * 2021-10-10 - Bugfix: Do not show suspended users in the block
 * 2021-10-08 - Bugfix: Show message icon only if the user is permitted to send a private message to the other user
