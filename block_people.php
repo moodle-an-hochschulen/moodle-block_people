@@ -123,7 +123,7 @@ class block_people extends block_base {
                     $currentcontext,
                     true,
                     'ra.id AS raid, r.id AS roleid, r.sortorder, u.id, u.lastname, u.firstname, u.firstnamephonetic,
-                            u.lastnamephonetic, u.middlename, u.alternatename, u.picture, u.imagealt, u.email',
+                            u.lastnamephonetic, u.middlename, u.alternatename, u.picture, u.imagealt, u.email, u.suspended',
                     'r.sortorder ASC, u.lastname ASC, u.firstname ASC');
         } else {
             $teachers = array();
@@ -144,6 +144,11 @@ class block_people extends block_base {
 
         // Check every teacher.
         foreach ($teachers as $teacher) {
+            // If the user is suspended, skip him.
+            if ($teacher->suspended == true) {
+                continue;
+            }
+
             // If users should only be listed once.
             if (!$multipleroles) {
                 // Continue if we have already shown this user.
@@ -209,7 +214,8 @@ class block_people extends block_base {
             $this->content->text .= fullname($teacher);
             $this->content->text .= html_writer::end_tag('div');
             $this->content->text .= html_writer::start_tag('div', array('class' => 'icons'));
-            if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $teacher->id != $USER->id) {
+            if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $teacher->id != $USER->id &&
+                    \core_message\api::can_send_message($teacher->id, $USER->id)) {
                 $this->content->text .= html_writer::start_tag('a',
                         array('href'  => new moodle_url('/message/index.php', array('id' => $teacher->id)),
                               'title' => get_string('sendmessageto', 'core_message', fullname($teacher))));

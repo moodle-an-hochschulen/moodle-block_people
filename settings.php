@@ -32,7 +32,7 @@ if ($ADMIN->fulltree) {
     // Settings title to group role related settings together with a common heading. We don't want a description here.
     $name = 'block_people/rolesheading';
     $title = get_string('setting_rolesheading', 'block_people', null, true);
-    $setting = new admin_setting_heading($name, $title, null);
+    $setting = new admin_setting_heading($name, $title, '');
     $settings->add($setting);
 
     // Setting to configure the roles to be shown within the block.
@@ -60,7 +60,7 @@ if ($ADMIN->fulltree) {
     // Settings title to group partictpants page related settings together with a common heading. We don't want a description here.
     $name = 'block_people/participantspageheading';
     $title = get_string('setting_participantspageheading', 'block_people', null, true);
-    $setting = new admin_setting_heading($name, $title, null);
+    $setting = new admin_setting_heading($name, $title, '');
     $settings->add($setting);
 
     // Setting to show link to the participants page within the block.
@@ -72,7 +72,7 @@ if ($ADMIN->fulltree) {
     // Settings title to group hiding the block related settings together with a common heading. We don't want a description here.
     $name = 'block_people/hideblockheading';
     $title = get_string('setting_hideblockheading', 'block_people', null, true);
-    $setting = new admin_setting_heading($name, $title, null);
+    $setting = new admin_setting_heading($name, $title, '');
     $settings->add($setting);
 
     // Setting to disable the possibility to hide the block.

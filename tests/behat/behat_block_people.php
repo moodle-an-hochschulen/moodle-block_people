@@ -60,4 +60,26 @@ class behat_block_people extends behat_base {
         $this->execute("behat_general::should_exist",
                 array($elementxpath, "xpath_element"));
     }
+
+    // @codingStandardsIgnoreStart
+    /**
+     * Checks, that the specified user is not listed in the section with the specified role within the block People.
+     *
+     * @Then /^the user "(?P<username_string>(?:[^"]|\\")*)" should not be listed in the section with the role "(?P<rolename_string>(?:[^"]|\\")*)"$/
+     *
+     * @param string $username
+     * @param string $rolename
+     */
+    public function user_should_not_be_listed_in_role_section($username, $rolename) {
+        // @codingStandardsIgnoreEnd
+
+        $elementxpath = "//section[contains(concat(' ',normalize-space(@class),' '),' block_people ')]";
+        $elementxpath .= "//h3[contains(text(),'{$rolename}')]";
+        $elementxpath .= "/following-sibling::ul//div[contains(text(),'{$username}')]";
+
+        // Check if the element exists.
+        $this->execute("behat_general::should_not_exist",
+                array($elementxpath, "xpath_element"));
+    }
+
 }
