@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2022-06-26 - Update maintainers and copyrights in README.md.
+
 ### v3.10-r3
 
 * 2021-10-10 - Bugfix: Do not show suspended users in the block
