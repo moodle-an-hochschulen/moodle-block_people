@@ -22,8 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 define('BLOCK_PEOPLE_SHOW_NOTHING', 0);
 define('BLOCK_PEOPLE_SHOW_DEFAULT_ROLES', 1);
 define('BLOCK_PEOPLE_SHOW_INSTANCE_ROLES', 2);
