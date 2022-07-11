@@ -91,6 +91,20 @@ See http://docs.moodle.org/en/Capabilities/moodle/site:sendmessage for details o
 block_people shows teacher role groups in the order defined in /admin/roles/manage.php. Please visit this settings page if you want to modify the sort order
 
 
+Capabilities
+------------
+
+This plugin also introduces these additional capabilities:
+
+### block/people:addinstance
+
+This capability controls who is allowed to add a new people block to the Dashboard
+
+### block/people:myaddinstance
+
+This capability controls who is allowed to add a new people block to all other pages
+
+
 Block placement
 ---------------
 
