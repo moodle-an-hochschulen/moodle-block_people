@@ -27,3 +27,9 @@ Manual tests
 ------------
 
 * There aren't any manual tests needed to upgrade this plugin.
+
+
+Visual checks
+-------------
+
+* It might be advisable to have a look at the output of the block in the GUI as Moodle themes can always change small details in this area.
