@@ -53,7 +53,7 @@ class behat_block_people extends behat_base {
     // @codingStandardsIgnoreEnd
 
         $elementxpath = "//section[contains(concat(' ',normalize-space(@class),' '),' block_people ')]";
-        $elementxpath .= "//h3[contains(text(),'{$rolename}')]";
+        $elementxpath .= "//h6[contains(text(),'{$rolename}')]";
         $elementxpath .= "/following-sibling::ul//div[contains(text(),'{$username}')]";
 
         // Check if the element exists.
@@ -74,7 +74,7 @@ class behat_block_people extends behat_base {
         // @codingStandardsIgnoreEnd
 
         $elementxpath = "//section[contains(concat(' ',normalize-space(@class),' '),' block_people ')]";
-        $elementxpath .= "//h3[contains(text(),'{$rolename}')]";
+        $elementxpath .= "//h6[contains(text(),'{$rolename}')]";
         $elementxpath .= "/following-sibling::ul//div[contains(text(),'{$username}')]";
 
         // Check if the element exists.

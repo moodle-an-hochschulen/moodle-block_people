@@ -163,7 +163,7 @@ class block_people extends block_base {
 
                 // Write heading and open new role list.
                 $teacherrole = $teacher->roleid;
-                $this->content->text .= html_writer::tag('h3', $rolenames[$teacherrole]);
+                $this->content->text .= html_writer::tag('h6', $rolenames[$teacherrole]);
                 $this->content->text .= html_writer::start_tag('ul');
             }
 
@@ -187,10 +187,10 @@ class block_people extends block_base {
             $this->content->text .= html_writer::start_tag('div', array('class' => 'image'));
             if (has_capability('moodle/user:viewdetails', $currentcontext)) {
                 $this->content->text .= $OUTPUT->user_picture($user,
-                        array('size' => 30, 'link' => true, 'courseid' => $COURSE->id, 'includefullname' => false));
+                        array('size' => 35, 'link' => true, 'courseid' => $COURSE->id, 'includefullname' => false));
             } else {
                 $this->content->text .= $OUTPUT->user_picture($user,
-                        array('size' => 30, 'link' => false, 'courseid' => $COURSE->id, 'includefullname' => false));
+                        array('size' => 35, 'link' => false, 'courseid' => $COURSE->id, 'includefullname' => false));
             }
             $this->content->text .= html_writer::end_tag('div');
 
@@ -205,7 +205,7 @@ class block_people extends block_base {
                 $this->content->text .= html_writer::start_tag('a',
                         array('href'  => new moodle_url('/message/index.php', array('id' => $teacher->id)),
                               'title' => get_string('sendmessageto', 'core_message', fullname($teacher))));
-                $this->content->text .= $OUTPUT->pix_icon('t/email',
+                $this->content->text .= $OUTPUT->pix_icon('t/message',
                         get_string('sendmessageto', 'core_message', fullname($teacher)), 'moodle');
                 $this->content->text .= html_writer::end_tag('a');
             }
@@ -228,7 +228,7 @@ class block_people extends block_base {
         // Output participants list if the setting linkparticipantspage is enabled.
         if ((get_config('block_people', 'linkparticipantspage')) != 0) {
             $this->content->text .= html_writer::start_tag('div', array('class' => 'participants'));
-            $this->content->text .= html_writer::tag('h3', get_string('participants'));
+            $this->content->text .= html_writer::tag('h6', get_string('participants'));
 
             // Only if user is allow to see participants list.
             if (course_can_view_participants($currentcontext)) {
