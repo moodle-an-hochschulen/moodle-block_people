@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v4.0-r1
 
 * 2022-07-12 - Slightly adapt the look of the block to Moodle 4.0.
 * 2022-07-12 - Prepare compatibility for Moodle 4.0.
