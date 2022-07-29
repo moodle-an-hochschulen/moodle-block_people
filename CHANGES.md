@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2022-07-12 - Prepare compatibility for Moodle 4.0.
+
 ### v3.11-r3
 
 * 2022-07-10 - Add Visual checks section to UPGRADE.md
