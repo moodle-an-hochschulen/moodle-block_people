@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v3.9-r6
 
 * 2022-07-10 - Add Visual checks section to UPGRADE.md
 * 2022-07-10 - Add Capabilities section to README.md
