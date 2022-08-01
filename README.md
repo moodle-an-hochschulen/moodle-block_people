@@ -1,7 +1,7 @@
 moodle-block_people
 ===================
 
-[![Moodle Plugin CI](https://github.com/moodle-an-hochschulen/moodle-block_people/workflows/Moodle%20Plugin%20CI/badge.svg?branch=master)](https://github.com/moodle-an-hochschulen/moodle-block_people/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3Amaster)
+[![Moodle Plugin CI](https://github.com/moodle-an-hochschulen/moodle-block_people/workflows/Moodle%20Plugin%20CI/badge.svg?branch=MOODLE_311_STABLE)](https://github.com/moodle-an-hochschulen/moodle-block_people/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3AMOODLE_311_STABLE)
 
 Moodle block which displays all teachers of a course with contact quicklinks, as well as a quicklink to the participants list
 
@@ -89,6 +89,20 @@ See http://docs.moodle.org/en/Capabilities/moodle/site:sendmessage for details o
 ### 2. Roles sort order
 
 block_people shows teacher role groups in the order defined in /admin/roles/manage.php. Please visit this settings page if you want to modify the sort order
+
+
+Capabilities
+------------
+
+This plugin also introduces these additional capabilities:
+
+### block/people:addinstance
+
+This capability controls who is allowed to add a new people block to the Dashboard
+
+### block/people:myaddinstance
+
+This capability controls who is allowed to add a new people block to all other pages
 
 
 Block placement
