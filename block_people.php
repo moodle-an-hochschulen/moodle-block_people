@@ -84,6 +84,11 @@ class block_people extends block_base {
     public function get_content() {
         global $COURSE, $CFG, $OUTPUT, $USER;
 
+        // Return empty block on my page.
+        if ($this->page->bodyid == 'page-my-index') {
+            return;
+        }
+
         if ($this->content !== null) {
             return $this->content;
         }
