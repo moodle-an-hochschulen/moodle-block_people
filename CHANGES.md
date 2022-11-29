@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2022-11-28 - Updated Moodle Plugin CI to latest upstream recommendations
+
 ### v4.0-r1
 
 * 2022-07-12 - Slightly adapt the look of the block to Moodle 4.0.
