@@ -203,7 +203,7 @@ class block_people extends block_base {
             if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $teacher->id != $USER->id &&
                     \core_message\api::can_send_message($teacher->id, $USER->id)) {
                 $this->content->text .= html_writer::start_tag('a',
-                        array('href'  => new moodle_url('/message/index.php', array('id' => $teacher->id)),
+                        array('href' => new moodle_url('/message/index.php', array('id' => $teacher->id)),
                               'title' => get_string('sendmessageto', 'core_message', fullname($teacher))));
                 $this->content->text .= $OUTPUT->pix_icon('t/email',
                         get_string('sendmessageto', 'core_message', fullname($teacher)), 'moodle');
@@ -233,7 +233,7 @@ class block_people extends block_base {
             // Only if user is allow to see participants list.
             if (course_can_view_participants($currentcontext)) {
                 $this->content->text .= html_writer::start_tag('a',
-                    array('href'  => new moodle_url('/user/index.php', array('contextid' => $currentcontext->id)),
+                    array('href' => new moodle_url('/user/index.php', array('contextid' => $currentcontext->id)),
                           'title' => get_string('participants')));
                 $this->content->text .= $OUTPUT->pix_icon('i/users',
                         get_string('participants', 'core'), 'moodle');
