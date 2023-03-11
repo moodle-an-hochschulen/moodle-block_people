@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2023-01-21 - Prepare compatibility for Moodle 4.1.
+
 ### v4.0-r2
 
 * 2023-03-30 - Add admin settings to control which teacher links are added in the block
