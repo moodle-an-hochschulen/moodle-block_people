@@ -48,6 +48,30 @@ if ($ADMIN->fulltree) {
     $description = get_string('setting_multipleroles_desc', 'block_people', null, true);
     $settings->add(new admin_setting_configcheckbox($name, $title, $description, 0));
 
+    // Settings title to group linking related settings together with a common heading. We don't want a description here.
+    $name = 'block_people/linkingheading';
+    $title = get_string('setting_linkingheading', 'block_people', null, true);
+    $setting = new admin_setting_heading($name, $title, '');
+    $settings->add($setting);
+
+    // Setting to add a link to the user's page onto the avatar.
+    $name = 'block_people/linkavatar';
+    $title = get_string('setting_linkavatar', 'block_people', null, true);
+    $description = get_string('setting_linkavatar_desc', 'block_people', null, true);
+    $settings->add(new admin_setting_configcheckbox($name, $title, $description, 1));
+
+    // Setting to add a link to the user's page onto the name.
+    $name = 'block_people/linkname';
+    $title = get_string('setting_linkname', 'block_people', null, true);
+    $description = get_string('setting_linkname_desc', 'block_people', null, true);
+    $settings->add(new admin_setting_configcheckbox($name, $title, $description, 0));
+
+    // Setting to add a link to the user's message system below the name.
+    $name = 'block_people/linkmessaging';
+    $title = get_string('setting_linkmessaging', 'block_people', null, true);
+    $description = get_string('setting_linkmessaging_desc', 'block_people', null, true);
+    $settings->add(new admin_setting_configcheckbox($name, $title, $description, 1));
+
     // Settings title to group partictpants page related settings together with a common heading. We don't want a description here.
     $name = 'block_people/participantspageheading';
     $title = get_string('setting_participantspageheading', 'block_people', null, true);

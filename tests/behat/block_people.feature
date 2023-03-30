@@ -130,8 +130,9 @@ Feature: Using the block_people plugin
   @javascript
   Scenario: The message icon is shown for users who can be messaged by the user
     Given the following config values are set as admin:
-      | config | value | plugin       |
-      | roles  | 3, 4  | block_people |
+      | config        | value | plugin       |
+      | linkmessaging | 1     | block_people |
+      | roles         | 3, 4  | block_people |
     And the following "users" exist:
       | username | firstname | lastname |
       | student1 | Student   | User     |
@@ -154,6 +155,79 @@ Feature: Using the block_people plugin
     And I am on "Course 1" course homepage
     Then "a[title='Send message to Non-editing teacher 1']" "css_element" should exist
     And "a[title='Send message to Teacher 1']" "css_element" should not exist
+
+  @javascript
+  Scenario: Counter check: Do not show the message icon
+    Given the following config values are set as admin:
+      | config        | value | plugin       |
+      | linkmessaging | 0     | block_people |
+      | roles         | 3, 4  | block_people |
+    And the following "users" exist:
+      | username | firstname | lastname |
+      | student1 | Student   | User     |
+    And the following "course enrolments" exist:
+      | user     | course | role    |
+      | student1 | C1     | student |
+    And I log in as "noneditor1"
+    And I open messaging
+    And I open messaging settings preferences
+    And I click on "//label[text()[contains(.,'My contacts and anyone in my courses')]]" "xpath_element"
+    And I log out
+    And I log in as "teacher1"
+    And I open messaging
+    And I open messaging settings preferences
+    And I click on "//label[text()[contains(.,'My contacts only')]]" "xpath_element"
+    And I am on "Course 1" course homepage with editing mode on
+    And I add the "People" block
+    And I log out
+    And I log in as "student1"
+    And I am on "Course 1" course homepage
+    Then "a[title='Send message to Non-editing teacher 1']" "css_element" should not exist
+    And "a[title='Send message to Teacher 1']" "css_element" should not exist
+
+  Scenario: Enable "Show link to the teacher page on the avatar"
+    Given the following config values are set as admin:
+      | config     | value | plugin       |
+      | linkavatar | 1     | block_people |
+      | roles      | 3, 4  | block_people |
+    When I log in as "teacher1"
+    And I am on "Course 1" course homepage with editing mode on
+    And I add the "People" block
+    Then the user "Teacher 1" should be listed in the section with the role "Teacher"
+    And ".block_people .teachers .image a" "css_element" should exist
+
+  Scenario: Counter check: Disable "Show link to the teacher page on the avatar"
+    Given the following config values are set as admin:
+      | config     | value | plugin       |
+      | linkavatar | 0     | block_people |
+      | roles      | 3, 4  | block_people |
+    When I log in as "teacher1"
+    And I am on "Course 1" course homepage with editing mode on
+    And I add the "People" block
+    Then the user "Teacher 1" should be listed in the section with the role "Teacher"
+    And ".block_people .teachers .image a" "css_element" should not exist
+
+  Scenario: Enable "Show link to the teacher page on the teacher name"
+    Given the following config values are set as admin:
+      | config   | value | plugin       |
+      | linkname | 1     | block_people |
+      | roles    | 3, 4  | block_people |
+    When I log in as "teacher1"
+    And I am on "Course 1" course homepage with editing mode on
+    And I add the "People" block
+    Then the user "Teacher 1" should be listed in the section with the role "Teacher"
+    And ".block_people .teachers .name a" "css_element" should exist
+
+  Scenario: Counter check: Disable "Show link to the teacher page on the teacher name"
+    Given the following config values are set as admin:
+      | config   | value | plugin       |
+      | linkname | 0     | block_people |
+      | roles    | 3, 4  | block_people |
+    When I log in as "teacher1"
+    And I am on "Course 1" course homepage with editing mode on
+    And I add the "People" block
+    Then the user "Teacher 1" should be listed in the section with the role "Teacher"
+    And ".block_people .teachers .name a" "css_element" should not exist
 
   Scenario: Do not show suspended users in the block
     Given the following config values are set as admin:
