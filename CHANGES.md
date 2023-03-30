@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2023-03-30 - Add admin settings to control which teacher links are added in the block
 * 2023-03-11 - Make codechecker happy again
 * 2022-11-28 - Updated Moodle Plugin CI to latest upstream recommendations
 

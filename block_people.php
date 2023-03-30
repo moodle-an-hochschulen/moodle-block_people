@@ -185,7 +185,7 @@ class block_people extends block_base {
 
             // Teacher image.
             $this->content->text .= html_writer::start_tag('div', array('class' => 'image'));
-            if (has_capability('moodle/user:viewdetails', $currentcontext)) {
+            if (get_config('block_people', 'linkavatar') == 1 && has_capability('moodle/user:viewdetails', $currentcontext)) {
                 $this->content->text .= $OUTPUT->user_picture($user,
                         array('size' => 35, 'link' => true, 'courseid' => $COURSE->id, 'includefullname' => false));
             } else {
@@ -197,10 +197,16 @@ class block_people extends block_base {
             // Teacher details.
             $this->content->text .= html_writer::start_tag('div', array('class' => 'details'));
             $this->content->text .= html_writer::start_tag('div', array('class' => 'name'));
-            $this->content->text .= fullname($teacher);
+            if (get_config('block_people', 'linkname') == 1 && has_capability('moodle/user:viewdetails', $currentcontext)) {
+                $linkurl = new moodle_url('/user/view.php', array('id' => $teacher->id, 'course' => 61));
+                $this->content->text .= html_writer::link($linkurl, fullname($teacher));
+            } else {
+                $this->content->text .= fullname($teacher);
+            }
             $this->content->text .= html_writer::end_tag('div');
             $this->content->text .= html_writer::start_tag('div', array('class' => 'icons'));
-            if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $teacher->id != $USER->id &&
+            if (get_config('block_people', 'linkmessaging') == 1 &&
+                    $CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $teacher->id != $USER->id &&
                     \core_message\api::can_send_message($teacher->id, $USER->id)) {
                 $this->content->text .= html_writer::start_tag('a',
                         array('href' => new moodle_url('/message/index.php', array('id' => $teacher->id)),
