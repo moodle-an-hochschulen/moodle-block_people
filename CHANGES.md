@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v4.0-r2
 
 * 2023-03-30 - Add admin settings to control which teacher links are added in the block
 * 2023-03-11 - Make codechecker happy again
