@@ -195,6 +195,9 @@ Feature: Using the block_people plugin
     And I add the "People" block
     Then the user "Teacher 1" should be listed in the section with the role "Teacher"
     And ".block_people .teachers .image a" "css_element" should exist
+    And I click on ".block_people .teachers .image a" "css_element"
+    And I should see "User details"
+    And I should see "Course details"
 
   Scenario: Counter check: Disable "Show link to the teacher page on the avatar"
     Given the following config values are set as admin:
@@ -217,6 +220,9 @@ Feature: Using the block_people plugin
     And I add the "People" block
     Then the user "Teacher 1" should be listed in the section with the role "Teacher"
     And ".block_people .teachers .name a" "css_element" should exist
+    And I click on ".block_people .teachers .name a" "css_element"
+    And I should see "User details"
+    And I should see "Course details"
 
   Scenario: Counter check: Disable "Show link to the teacher page on the teacher name"
     Given the following config values are set as admin:
