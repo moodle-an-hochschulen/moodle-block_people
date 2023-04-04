@@ -198,7 +198,7 @@ class block_people extends block_base {
             $this->content->text .= html_writer::start_tag('div', array('class' => 'details'));
             $this->content->text .= html_writer::start_tag('div', array('class' => 'name'));
             if (get_config('block_people', 'linkname') == 1 && has_capability('moodle/user:viewdetails', $currentcontext)) {
-                $linkurl = new moodle_url('/user/view.php', array('id' => $teacher->id, 'course' => 61));
+                $linkurl = new moodle_url('/user/view.php', array('id' => $teacher->id, 'course' => $COURSE->id));
                 $this->content->text .= html_writer::link($linkurl, fullname($teacher));
             } else {
                 $this->content->text .= fullname($teacher);

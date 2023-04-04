@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2023-04-04 - Bugfix: Link on teacher name was linking to a fixed course ID
+
 ### v4.0-r2
 
 * 2023-03-30 - Add admin settings to control which teacher links are added in the block
