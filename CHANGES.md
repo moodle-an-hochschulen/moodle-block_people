@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2023-04-30 - Tests: Updated Moodle Plugin CI to use PHP 8.1 and Postgres 13 from Moodle 4.1 on.
+
 ### v4.1-r2
 
 * 2023-04-04 - Bugfix: Link on teacher name was linking to a fixed course ID
