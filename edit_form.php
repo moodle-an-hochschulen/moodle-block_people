@@ -58,11 +58,9 @@ class block_people_edit_form extends block_edit_form {
      * @return object
      */
     public function get_data() {
-        if ($data = parent::get_data()) {
-            // Check if not isset and create an empty array.
-            if (!isset($data->config_instanceroles)) {
-                $data->config_instanceroles = [];
-            }
+        // Check if not isset and create an empty array.
+        if (($data = parent::get_data()) && !isset($data->config_instanceroles)) {
+            $data->config_instanceroles = [];
         }
         return $data;
     }
