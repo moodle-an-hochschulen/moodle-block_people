@@ -4,6 +4,29 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2023-04-30 - Tests: Updated Moodle Plugin CI to use PHP 8.1 and Postgres 13 from Moodle 4.1 on.
+
+### v4.1-r2
+
+* 2023-04-04 - Bugfix: Link on teacher name was linking to a fixed course ID
+
+### v4.1-r1
+
+* 2023-01-21 - Prepare compatibility for Moodle 4.1.
+
+### v4.0-r2
+
+* 2023-03-30 - Add admin settings to control which teacher links are added in the block
+* 2023-03-11 - Make codechecker happy again
+* 2022-11-28 - Updated Moodle Plugin CI to latest upstream recommendations
+
+### v4.0-r1
+
+* 2022-07-12 - Slightly adapt the look of the block to Moodle 4.0.
+* 2022-07-12 - Prepare compatibility for Moodle 4.0.
+
 ### v3.11-r3
 
 * 2022-07-10 - Add Visual checks section to UPGRADE.md

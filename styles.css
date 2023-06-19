@@ -18,7 +18,7 @@
 }
 
 .block_people .teachers .image {
-    width: 45px;
+    width: 50px;
     display: table-cell;
     vertical-align: top;
 }
@@ -31,12 +31,6 @@
 .block_people .teachers .icons img,
 .block_people .participants img {
     margin-right: 10px;
-}
-
-.block_people .content .teachers h3,
-.block_people .content .participants h3 {
-    font-size: 1.143rem;
-    font-weight: bold;
 }
 
 .block_people .content .teachers .userpicture {

@@ -175,7 +175,7 @@ class block_people extends block_base {
 
                 // Write heading and open new role list.
                 $teacherrole = $teacher->roleid;
-                $this->content->text .= html_writer::tag('h3', $rolenames[$teacherrole]);
+                $this->content->text .= html_writer::tag('h6', $rolenames[$teacherrole]);
                 $this->content->text .= html_writer::start_tag('ul');
             }
 
@@ -197,27 +197,33 @@ class block_people extends block_base {
 
             // Teacher image.
             $this->content->text .= html_writer::start_tag('div', array('class' => 'image'));
-            if (has_capability('moodle/user:viewdetails', $currentcontext)) {
+            if (get_config('block_people', 'linkavatar') == 1 && has_capability('moodle/user:viewdetails', $currentcontext)) {
                 $this->content->text .= $OUTPUT->user_picture($user,
-                        array('size' => 30, 'link' => true, 'courseid' => $COURSE->id, 'includefullname' => false));
+                        array('size' => 35, 'link' => true, 'courseid' => $COURSE->id, 'includefullname' => false));
             } else {
                 $this->content->text .= $OUTPUT->user_picture($user,
-                        array('size' => 30, 'link' => false, 'courseid' => $COURSE->id, 'includefullname' => false));
+                        array('size' => 35, 'link' => false, 'courseid' => $COURSE->id, 'includefullname' => false));
             }
             $this->content->text .= html_writer::end_tag('div');
 
             // Teacher details.
             $this->content->text .= html_writer::start_tag('div', array('class' => 'details'));
             $this->content->text .= html_writer::start_tag('div', array('class' => 'name'));
-            $this->content->text .= fullname($teacher);
+            if (get_config('block_people', 'linkname') == 1 && has_capability('moodle/user:viewdetails', $currentcontext)) {
+                $linkurl = new moodle_url('/user/view.php', array('id' => $teacher->id, 'course' => $COURSE->id));
+                $this->content->text .= html_writer::link($linkurl, fullname($teacher));
+            } else {
+                $this->content->text .= fullname($teacher);
+            }
             $this->content->text .= html_writer::end_tag('div');
             $this->content->text .= html_writer::start_tag('div', array('class' => 'icons'));
-            if ($CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $teacher->id != $USER->id &&
+            if (get_config('block_people', 'linkmessaging') == 1 &&
+                    $CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $teacher->id != $USER->id &&
                     \core_message\api::can_send_message($teacher->id, $USER->id)) {
                 $this->content->text .= html_writer::start_tag('a',
-                        array('href'  => new moodle_url('/message/index.php', array('id' => $teacher->id)),
+                        array('href' => new moodle_url('/message/index.php', array('id' => $teacher->id)),
                               'title' => get_string('sendmessageto', 'core_message', fullname($teacher))));
-                $this->content->text .= $OUTPUT->pix_icon('t/email',
+                $this->content->text .= $OUTPUT->pix_icon('t/message',
                         get_string('sendmessageto', 'core_message', fullname($teacher)), 'moodle');
                 $this->content->text .= html_writer::end_tag('a');
             }
@@ -240,12 +246,12 @@ class block_people extends block_base {
         // Output participants list if the setting linkparticipantspage is enabled.
         if ((get_config('block_people', 'linkparticipantspage')) != 0) {
             $this->content->text .= html_writer::start_tag('div', array('class' => 'participants'));
-            $this->content->text .= html_writer::tag('h3', get_string('participants'));
+            $this->content->text .= html_writer::tag('h6', get_string('participants'));
 
             // Only if user is allow to see participants list.
             if (course_can_view_participants($currentcontext)) {
                 $this->content->text .= html_writer::start_tag('a',
-                    array('href'  => new moodle_url('/user/index.php', array('contextid' => $currentcontext->id)),
+                    array('href' => new moodle_url('/user/index.php', array('contextid' => $currentcontext->id)),
                           'title' => get_string('participants')));
                 $this->content->text .= $OUTPUT->pix_icon('i/users',
                         get_string('participants', 'core'), 'moodle');
