@@ -24,19 +24,19 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
-    'block/people:myaddinstance' => array(
+$capabilities = [
+    'block/people:myaddinstance' => [
         'captype' => 'write',
-        'contextlevel' => CONTEXT_SYSTEM
-    ),
-    'block/people:addinstance' => array(
+        'contextlevel' => CONTEXT_SYSTEM,
+    ],
+    'block/people:addinstance' => [
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
+        'archetypes' => [
             'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
-        ),
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
-    ),
-);
+            'manager' => CAP_ALLOW,
+        ],
+        'clonepermissionsfrom' => 'moodle/site:manageblocks',
+    ],
+];
