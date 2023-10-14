@@ -39,7 +39,7 @@ if ($ADMIN->fulltree) {
     $name = 'block_people/roles';
     $title = get_string('setting_roles', 'block_people', null, true);
     $description = get_string('setting_roles_desc', 'block_people', null, true);
-    $default = array('editingteacher');
+    $default = ['editingteacher'];
     $settings->add(new admin_setting_pickroles($name, $title, $description, $default));
 
     // Setting to show multiple roles within the block.

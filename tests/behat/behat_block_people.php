@@ -65,7 +65,7 @@ class behat_block_people extends behat_base {
 
         // Check if the element exists.
         $this->execute("behat_general::should_exist",
-                array($elementxpath, "xpath_element"));
+                [$elementxpath, "xpath_element"]);
     }
 
     // @codingStandardsIgnoreStart
@@ -86,7 +86,7 @@ class behat_block_people extends behat_base {
 
         // Check if the element exists.
         $this->execute("behat_general::should_not_exist",
-                array($elementxpath, "xpath_element"));
+                [$elementxpath, "xpath_element"]);
     }
 
 }
