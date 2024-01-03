@@ -42,6 +42,15 @@ if ($ADMIN->fulltree) {
     $default = ['editingteacher'];
     $settings->add(new admin_setting_pickroles($name, $title, $description, $default));
 
+    // Overridable roles.
+    $name = 'block_people/overridableroles';
+    $title = get_string('setting_overridableroles', 'block_people', null, true);
+    $description = get_string('setting_overridableroles_help', 'block_people', null, true);
+    $default = array();
+    $setting = new admin_setting_pickroles($name, $title, $description, $default);
+    $setting->set_updatedcallback('block_people_reset_instance_overridable_roles');
+    $settings->add($setting);
+
     // Setting to show multiple roles within the block.
     $name = 'block_people/multipleroles';
     $title = get_string('setting_multipleroles', 'block_people', null, true);

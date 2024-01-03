@@ -55,6 +55,14 @@ class block_people extends block_base {
     }
 
     /**
+     * instance_allow_config function
+     * @return boolean
+     */
+    public function instance_allow_config() {
+        return true;
+    }
+
+    /**
      * instance_allow_multiple function
      * @return bool
      */
@@ -101,11 +109,15 @@ class block_people extends block_base {
         // Get context.
         $currentcontext = $this->page->context;
 
+        require_once(__DIR__ . '/locallib.php');
+
+        // Get roles from instance settings or default settings.
+        $rolesvisualization = block_people_get_roles_visualization($this, $currentcontext);
+        $roles = block_people_get_roles_to_be_shown($this, $rolesvisualization);
         // Get teachers separated by roles.
-        $roles = get_config('block_people', 'roles');
+        $teachers = array();
         if (!empty($roles)) {
-            $teacherroles = explode(',', $roles);
-            $teachers = get_role_users($teacherroles,
+            $teachers = get_role_users($roles,
                     $currentcontext,
                     true,
                     'ra.id AS raid, r.id AS roleid, r.sortorder, u.id, u.lastname, u.firstname, u.firstnamephonetic,

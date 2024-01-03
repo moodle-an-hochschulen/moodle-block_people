@@ -39,4 +39,12 @@ $capabilities = [
         ],
         'clonepermissionsfrom' => 'moodle/site:manageblocks',
     ],
+    'block/people:overrideglobalsettings' => [
+        'riskbitmask' => RISK_SPAM | RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
+    ],
 ];

@@ -28,6 +28,7 @@ $string['pluginname'] = 'People';
 $string['participantslist'] = 'Show participants list';
 $string['people:addinstance'] = 'Add a new people block';
 $string['people:myaddinstance'] = 'Add a new people block to Dashboard';
+$string['people:overrideglobalsettings'] = 'Override global settings';
 $string['privacy:metadata'] = 'The people plugin provides extended functionality to Moodle users, but does not store any personal data.';
 $string['noparticipantslist'] = 'Viewing the participants list is prohibited in this course';
 
@@ -56,6 +57,14 @@ After saving this option, the database operations for resetting the visibility w
 $string['setting_rolesheading'] = 'Roles';
 $string['setting_roles'] = 'Show these roles';
 $string['setting_roles_desc'] = 'This setting allows you to control which users appear in this block. Users need to have at least one of these roles in a course to be shown in the block.';
+$string['setting_overridableroles'] = 'Available roles for instance override';
+$string['setting_overridableroles_help'] = 'List of available roles in block instance\'s settings when local override is allowed.';
+
+$string['setting_overridedefaultroles'] = 'Override default roles';
+$string['setting_overridedefaultroles_help'] = 'List of available roles in block instance\'s settings when local override is allowed.';
+$string['setting_instanceroles'] = 'Roles to display';
+$string['setting_instanceroles_help'] = 'List of available roles in block instance\'s settings when local override is allowed and selected.';
+$string['setting_overridenotallowed'] = 'Instance override of default settings is not allowed';
 
 // Notifications.
 $string['resetvisibilitysuccess'] = 'Success! All "block_people" instances are visible (again). <br/> The setting "Reset visibility" has been reset.';
