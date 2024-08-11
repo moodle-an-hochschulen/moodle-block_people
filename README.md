@@ -105,6 +105,12 @@ This capability controls who is allowed to add a new people block to the Dashboa
 This capability controls who is allowed to add a new people block to all other pages
 
 
+Scheduled Tasks
+---------------
+
+This plugin does not add any additional scheduled tasks.
+
+
 Block placement
 ---------------
 
