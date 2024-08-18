@@ -40,7 +40,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class behat_block_people extends behat_base {
-    // @codingStandardsIgnoreStart
+    // phpcs:disable moodle.Files.LineLength.TooLong
     /**
      * Checks, that the specified user is listed in the section with the specified role within the block People.
      *
@@ -50,7 +50,6 @@ class behat_block_people extends behat_base {
      * @param string $rolename
      */
     public function user_should_be_listed_in_role_section($username, $rolename) {
-    // @codingStandardsIgnoreEnd
 
         // Teacher entries without link.
         $elementxpath = "//section[contains(concat(' ',normalize-space(@class),' '),' block_people ')]";
@@ -68,7 +67,7 @@ class behat_block_people extends behat_base {
                 [$elementxpath, "xpath_element"]);
     }
 
-    // @codingStandardsIgnoreStart
+    // phpcs:disable moodle.Files.LineLength.TooLong
     /**
      * Checks, that the specified user is not listed in the section with the specified role within the block People.
      *
@@ -78,7 +77,6 @@ class behat_block_people extends behat_base {
      * @param string $rolename
      */
     public function user_should_not_be_listed_in_role_section($username, $rolename) {
-        // @codingStandardsIgnoreEnd
 
         $elementxpath = "//section[contains(concat(' ',normalize-space(@class),' '),' block_people ')]";
         $elementxpath .= "//h6[contains(text(),'{$rolename}')]";
