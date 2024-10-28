@@ -198,7 +198,7 @@ class block_people extends block_base {
             $this->content->text .= html_writer::start_tag('div', ['class' => 'details']);
             $this->content->text .= html_writer::start_tag('div', ['class' => 'name']);
             if (get_config('block_people', 'linkname') == 1 && has_capability('moodle/user:viewdetails', $currentcontext)) {
-                $linkurl = new moodle_url('/user/view.php', ['id' => $teacher->id, 'course' => $COURSE->id]);
+                $linkurl = new \core\url('/user/view.php', ['id' => $teacher->id, 'course' => $COURSE->id]);
                 $this->content->text .= html_writer::link($linkurl, fullname($teacher));
             } else {
                 $this->content->text .= fullname($teacher);
@@ -209,7 +209,7 @@ class block_people extends block_base {
                     $CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $teacher->id != $USER->id &&
                     \core_message\api::can_send_message($teacher->id, $USER->id)) {
                 $this->content->text .= html_writer::start_tag('a',
-                        ['href' => new moodle_url('/message/index.php', ['id' => $teacher->id]),
+                        ['href' => new \core\url('/message/index.php', ['id' => $teacher->id]),
                               'title' => get_string('sendmessageto', 'core_message', fullname($teacher)), ]);
                 $this->content->text .= $OUTPUT->pix_icon('t/message',
                         get_string('sendmessageto', 'core_message', fullname($teacher)), 'moodle');
@@ -239,7 +239,7 @@ class block_people extends block_base {
             // Only if user is allow to see participants list.
             if (course_can_view_participants($currentcontext)) {
                 $this->content->text .= html_writer::start_tag('a',
-                    ['href' => new moodle_url('/user/index.php', ['contextid' => $currentcontext->id]),
+                    ['href' => new \core\url('/user/index.php', ['contextid' => $currentcontext->id]),
                           'title' => get_string('participants'), ]);
                 $this->content->text .= $OUTPUT->pix_icon('i/users',
                         get_string('participants', 'core'), 'moodle');
