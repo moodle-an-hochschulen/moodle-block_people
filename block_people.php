@@ -107,12 +107,14 @@ class block_people extends block_base {
         $roles = get_config('block_people', 'roles');
         if (!empty($roles)) {
             $teacherroles = explode(',', $roles);
-            $teachers = get_role_users($teacherroles,
-                    $currentcontext,
-                    true,
-                    'ra.id AS raid, r.id AS roleid, r.sortorder, u.id, u.lastname, u.firstname, u.firstnamephonetic,
+            $teachers = get_role_users(
+                $teacherroles,
+                $currentcontext,
+                true,
+                'ra.id AS raid, r.id AS roleid, r.sortorder, u.id, u.lastname, u.firstname, u.firstnamephonetic,
                             u.lastnamephonetic, u.middlename, u.alternatename, u.picture, u.imagealt, u.email, u.suspended',
-                    'r.sortorder ASC, u.lastname ASC, u.firstname ASC');
+                'r.sortorder ASC, u.lastname ASC, u.firstname ASC'
+            );
         } else {
             $teachers = [];
         }
@@ -188,11 +190,15 @@ class block_people extends block_base {
             // Teacher image.
             $this->content->text .= html_writer::start_tag('div', ['class' => 'image']);
             if (get_config('block_people', 'linkavatar') == 1 && has_capability('moodle/user:viewdetails', $currentcontext)) {
-                $this->content->text .= $OUTPUT->user_picture($user,
-                        ['size' => 35, 'link' => true, 'courseid' => $COURSE->id, 'includefullname' => false]);
+                $this->content->text .= $OUTPUT->user_picture(
+                    $user,
+                    ['size' => 35, 'link' => true, 'courseid' => $COURSE->id, 'includefullname' => false]
+                );
             } else {
-                $this->content->text .= $OUTPUT->user_picture($user,
-                        ['size' => 35, 'link' => false, 'courseid' => $COURSE->id, 'includefullname' => false]);
+                $this->content->text .= $OUTPUT->user_picture(
+                    $user,
+                    ['size' => 35, 'link' => false, 'courseid' => $COURSE->id, 'includefullname' => false]
+                );
             }
             $this->content->text .= html_writer::end_tag('div');
 
@@ -207,14 +213,26 @@ class block_people extends block_base {
             }
             $this->content->text .= html_writer::end_tag('div');
             $this->content->text .= html_writer::start_tag('div', ['class' => 'icons']);
-            if (get_config('block_people', 'linkmessaging') == 1 &&
+            if (
+                get_config('block_people', 'linkmessaging') == 1 &&
                     $CFG->messaging && has_capability('moodle/site:sendmessage', $currentcontext) && $teacher->id != $USER->id &&
-                    \core_message\api::can_send_message($teacher->id, $USER->id)) {
-                $this->content->text .= html_writer::start_tag('a',
-                        ['href' => new \core\url('/message/index.php', ['id' => $teacher->id]),
-                              'title' => get_string('sendmessageto', 'core_message', fullname($teacher)), ]);
-                $this->content->text .= $OUTPUT->pix_icon('t/message',
-                        get_string('sendmessageto', 'core_message', fullname($teacher)), 'moodle');
+                    \core_message\api::can_send_message($teacher->id, $USER->id)
+            ) {
+                $this->content->text .= html_writer::start_tag(
+                    'a',
+                    ['href' => new \core\url('/message/index.php', ['id' => $teacher->id]),
+                    'title' => get_string(
+                        'sendmessageto',
+                        'core_message',
+                        fullname($teacher)
+                    ),
+                    ]
+                );
+                $this->content->text .= $OUTPUT->pix_icon(
+                    't/message',
+                    get_string('sendmessageto', 'core_message', fullname($teacher)),
+                    'moodle'
+                );
                 $this->content->text .= html_writer::end_tag('a');
             }
             $this->content->text .= html_writer::end_tag('div');
@@ -222,7 +240,6 @@ class block_people extends block_base {
 
             // End output teacher.
             $this->content->text .= html_writer::end_tag('li');
-
         }
 
         // End role list if necessary.
@@ -240,11 +257,17 @@ class block_people extends block_base {
 
             // Only if user is allow to see participants list.
             if (course_can_view_participants($currentcontext)) {
-                $this->content->text .= html_writer::start_tag('a',
+                $this->content->text .= html_writer::start_tag(
+                    'a',
                     ['href' => new \core\url('/user/index.php', ['contextid' => $currentcontext->id]),
-                          'title' => get_string('participants'), ]);
-                $this->content->text .= $OUTPUT->pix_icon('i/users',
-                        get_string('participants', 'core'), 'moodle');
+                    'title' => get_string('participants'),
+                    ]
+                );
+                $this->content->text .= $OUTPUT->pix_icon(
+                    'i/users',
+                    get_string('participants', 'core'),
+                    'moodle'
+                );
                 $this->content->text .= get_string('participantslist', 'block_people');
                 $this->content->text .= html_writer::end_tag('a');
             } else {

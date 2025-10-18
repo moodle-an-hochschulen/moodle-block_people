@@ -63,8 +63,10 @@ class behat_block_people extends behat_base {
         $elementxpath .= "/following-sibling::ul//a[contains(text(),'{$username}')]";
 
         // Check if the element exists.
-        $this->execute("behat_general::should_exist",
-                [$elementxpath, "xpath_element"]);
+        $this->execute(
+            "behat_general::should_exist",
+            [$elementxpath, "xpath_element"]
+        );
     }
 
     // phpcs:disable moodle.Files.LineLength.TooLong
@@ -83,8 +85,9 @@ class behat_block_people extends behat_base {
         $elementxpath .= "/following-sibling::ul//div[contains(text(),'{$username}')]";
 
         // Check if the element exists.
-        $this->execute("behat_general::should_not_exist",
-                [$elementxpath, "xpath_element"]);
+        $this->execute(
+            "behat_general::should_not_exist",
+            [$elementxpath, "xpath_element"]
+        );
     }
-
 }
