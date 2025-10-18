@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 if ($ADMIN->fulltree) {
     global $CFG;
     // Locallib for updatedcallback function.
-    require_once($CFG->dirroot.'/blocks/people/locallib.php');
+    require_once($CFG->dirroot . '/blocks/people/locallib.php');
 
     // Settings title to group role related settings together with a common heading. We don't want a description here.
     $name = 'block_people/rolesheading';
@@ -104,4 +104,3 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('block_people_reset_visibility');
     $settings->add($setting);
 }
-
