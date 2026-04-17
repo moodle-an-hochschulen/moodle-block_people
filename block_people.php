@@ -107,14 +107,46 @@ class block_people extends block_base {
         $roles = get_config('block_people', 'roles');
         if (!empty($roles)) {
             $teacherroles = explode(',', $roles);
-            $teachers = get_role_users(
-                $teacherroles,
-                $currentcontext,
-                true,
-                'ra.id AS raid, r.id AS roleid, r.sortorder, u.id, u.lastname, u.firstname, u.firstnamephonetic,
-                            u.lastnamephonetic, u.middlename, u.alternatename, u.picture, u.imagealt, u.email, u.suspended',
-                'r.sortorder ASC, u.lastname ASC, u.firstname ASC'
-            );
+
+            // Determine if we should filter by the current user's groups.
+            // When the course uses separate groups and the user does not have the
+            // capability to access all groups, only show teachers from the user's group(s).
+            $groupids = [];
+            $groupmode = groups_get_course_groupmode($COURSE);
+            if ($groupmode == SEPARATEGROUPS && !has_capability('moodle/site:accessallgroups', $currentcontext)) {
+                $usergroups = groups_get_user_groups($COURSE->id, $USER->id);
+                if (!empty($usergroups[0])) {
+                    $groupids = $usergroups[0];
+                }
+            }
+
+            $fields = 'ra.id AS raid, r.id AS roleid, r.sortorder, u.id, u.lastname, u.firstname, u.firstnamephonetic,
+                            u.lastnamephonetic, u.middlename, u.alternatename, u.picture, u.imagealt, u.email, u.suspended';
+            $sort = 'r.sortorder ASC, u.lastname ASC, u.firstname ASC';
+
+            // Fetch teachers, merging results from all user groups if needed.
+            if (!empty($groupids)) {
+                $teachers = [];
+                foreach ($groupids as $gid) {
+                    $teachers = $teachers + get_role_users(
+                        $teacherroles,
+                        $currentcontext,
+                        true,
+                        $fields,
+                        $sort,
+                        true,
+                        $gid
+                    );
+                }
+            } else {
+                $teachers = get_role_users(
+                    $teacherroles,
+                    $currentcontext,
+                    true,
+                    $fields,
+                    $sort
+                );
+            }
         } else {
             $teachers = [];
         }
