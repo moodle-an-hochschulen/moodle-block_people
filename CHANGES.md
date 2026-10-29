@@ -6,6 +6,8 @@ Changes
 
 ### Unreleased
 
+* 2026-10-29 - Bugfix: Make the "Reset visibility" setting work on all database types and show the error notification if resetting fails.
+* 2026-10-29 - Tests: Add PHPUnit test for resetting the visibility of all People blocks.
 * 2026-10-29 - Code quality: Require course/lib.php explicitly before calling course_can_view_participants().
 
 ### v5.1-r1
