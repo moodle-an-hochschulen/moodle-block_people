@@ -4,6 +4,10 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2026-10-29 - Code quality: Require course/lib.php explicitly before calling course_can_view_participants().
+
 ### v5.2-r1
 
 * 2026-04-20 - Prepare compatibility for Moodle 5.2.
