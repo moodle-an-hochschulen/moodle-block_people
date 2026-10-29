@@ -86,6 +86,10 @@ class block_people extends block_base {
     public function get_content() {
         global $COURSE, $CFG, $OUTPUT, $USER;
 
+        // Require course library as course_can_view_participants() is used below
+        // and course/lib.php is not loaded on every page which might render this block.
+        require_once($CFG->dirroot . '/course/lib.php');
+
         if ($this->content !== null) {
             return $this->content;
         }
