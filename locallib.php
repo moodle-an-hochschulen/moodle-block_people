@@ -28,15 +28,18 @@
 function block_people_reset_visibility() {
     global $DB;
     if (get_config('block_people', 'resetvisibility') == 1) {
-        // SQL-Statement to update the visibility of all block_people instances to visible (=1).
-        $sql = "UPDATE {block_positions} bp
-            SET visible = 1
-            WHERE bp.blockinstanceid IN (SELECT id
-                                        FROM {block_instances} bi
-                                        WHERE bi.blockname = 'people')";
-        if ($DB->execute($sql) == true) {
+        // Update the visibility of all block_people instances to visible (=1).
+        // Core does not provide a bulk API for this, thus we update the block positions with the DML API directly.
+        try {
+            $DB->set_field_select(
+                'block_positions',
+                'visible',
+                1,
+                'blockinstanceid IN (SELECT id FROM {block_instances} WHERE blockname = :blockname)',
+                ['blockname' => 'people']
+            );
             \core\notification::info(get_string('resetvisibilitysuccess', 'block_people'));
-        } else {
+        } catch (dml_exception $e) {
             \core\notification::error(get_string('resetvisibilityerror', 'block_people'));
         }
         // Reset the checkbox.
