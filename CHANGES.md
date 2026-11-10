@@ -4,7 +4,7 @@ moodle-block_people
 Changes
 -------
 
-### Unreleased
+### v4.5-r3
 
 * 2026-10-29 - Bugfix: Make the "Reset visibility" setting work on all database types and show the error notification if resetting fails.
 * 2026-10-29 - Tests: Add PHPUnit test for resetting the visibility of all People blocks.
