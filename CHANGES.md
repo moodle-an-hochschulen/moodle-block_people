@@ -6,6 +6,7 @@ Changes
 
 ### Unreleased
 
+* 2026-11-15 - Improvement: Escape the user full names in the block output.
 * 2026-11-15 - Documentation: Document the direct write to the core block_positions table in the "Reset visibility" setting and add a corresponding check to UPGRADE.md.
 
 ### v5.1-r2
