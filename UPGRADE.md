@@ -15,6 +15,7 @@ Upstream changes
 ----------------
 
 * This plugin does not inherit or copy anything from upstream sources.
+* However, the "Reset visibility" setting writes to the core table `block_positions` directly (see `block_people_reset_visibility()` in locallib.php) as core does not provide a bulk API for this. Please check if core has added a bulk API for setting the block visibility or has started to cache or to trigger events for block positions in the meantime. If yes, the function has to be adapted.
 
 
 Automated tests
