@@ -211,9 +211,9 @@ class block_people extends block_base {
             $this->content->text .= html_writer::start_tag('div', ['class' => 'name']);
             if (get_config('block_people', 'linkname') == 1 && has_capability('moodle/user:viewdetails', $currentcontext)) {
                 $linkurl = new \core\url('/user/view.php', ['id' => $teacher->id, 'course' => $COURSE->id]);
-                $this->content->text .= html_writer::link($linkurl, fullname($teacher));
+                $this->content->text .= html_writer::link($linkurl, s(fullname($teacher)));
             } else {
-                $this->content->text .= fullname($teacher);
+                $this->content->text .= s(fullname($teacher));
             }
             $this->content->text .= html_writer::end_tag('div');
             $this->content->text .= html_writer::start_tag('div', ['class' => 'icons']);
