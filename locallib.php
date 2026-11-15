@@ -29,7 +29,11 @@ function block_people_reset_visibility() {
     global $DB;
     if (get_config('block_people', 'resetvisibility') == 1) {
         // Update the visibility of all block_people instances to visible (=1).
-        // Core does not provide a bulk API for this, thus we update the block positions with the DML API directly.
+        // This writes to the core table block_positions directly with the DML API on purpose:
+        // Core only provides blocks_set_visibility() which handles a single block instance on a single page
+        // and requires a page object, but it does not provide a bulk API for this.
+        // Only existing rows need to be updated, as a block which was never hidden does not have a row
+        // in block_positions and is visible by default.
         try {
             $DB->set_field_select(
                 'block_positions',
