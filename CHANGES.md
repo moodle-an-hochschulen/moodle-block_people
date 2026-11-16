@@ -4,6 +4,11 @@ moodle-block_people
 Changes
 -------
 
+### Unreleased
+
+* 2026-11-15 - Improvement: Escape the user full names in the block output.
+* 2026-11-15 - Documentation: Document the direct write to the core block_positions table in the "Reset visibility" setting and add a corresponding check to UPGRADE.md.
+
 ### v5.3-r2
 
 * 2026-10-29 - Bugfix: Make the "Reset visibility" setting work on all database types and show the error notification if resetting fails.
